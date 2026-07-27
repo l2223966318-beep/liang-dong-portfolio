@@ -100,7 +100,11 @@ export function MotionProvider({ children }: { children: ReactNode }) {
 
       return () => media.revert()
     },
-    { scope: root, dependencies: [reducedMotion] },
+    {
+      scope: root,
+      dependencies: [reducedMotion],
+      revertOnUpdate: true,
+    },
   )
 
   const content = (

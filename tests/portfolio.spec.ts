@@ -1,4 +1,21 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
+
+async function getScrollTriggerCount(page: Page) {
+  return page.evaluate(async () => {
+    const resource = performance
+      .getEntriesByType('resource')
+      .map((entry) => entry.name)
+      .find((name) => name.includes('gsap_ScrollTrigger'))
+
+    if (!resource) throw new Error('ScrollTrigger module resource was not loaded')
+
+    const loaded = await import(/* @vite-ignore */ resource)
+    const scrollTrigger =
+      loaded.ScrollTrigger ?? loaded.default?.ScrollTrigger ?? loaded.default
+
+    return scrollTrigger.getAll().length as number
+  })
+}
 
 test('recruiter can inspect a project and reach the resume', async ({ page }) => {
   await page.goto('/')
@@ -142,4 +159,41 @@ test('reduced motion and video failure expose the poster without controls', asyn
   await expect(
     page.getByRole('button', { name: '暂停背景视频' }),
   ).toHaveCount(0)
+})
+
+test('runtime motion preference changes clean up and rebuild enhancements', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+
+  const motionRoot = page.locator('.motion-root')
+  const heroLine = page.locator('.hero__title span').first()
+  const profileImage = page.locator('.profile__visual img')
+  const progress = page.locator('.page-track__progress')
+
+  await expect(motionRoot).toHaveClass(/\bhas-motion\b/)
+  await expect(heroLine).toHaveAttribute('style', /transform/)
+  await expect(profileImage).toHaveAttribute('style', /transform/)
+  const initialTriggerCount = await getScrollTriggerCount(page)
+  expect(initialTriggerCount).toBeGreaterThan(0)
+
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+
+  await expect(motionRoot).not.toHaveClass(/\bhas-motion\b/)
+  await expect(
+    page.getByRole('img', { name: '彩色透明材质动态背景' }),
+  ).toBeVisible()
+  await expect(heroLine).not.toHaveAttribute('style', /transform/)
+  await expect(profileImage).not.toHaveAttribute('style', /transform/)
+  await expect(progress).not.toHaveAttribute('style', /transform/)
+  await expect.poll(() => getScrollTriggerCount(page)).toBe(0)
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+
+  await expect(motionRoot).toHaveClass(/\bhas-motion\b/)
+  await expect(
+    page.getByRole('button', { name: '暂停背景视频' }),
+  ).toBeVisible()
+  await expect.poll(() => getScrollTriggerCount(page)).toBe(initialTriggerCount)
 })
