@@ -80,7 +80,6 @@
   right: -4%;
   width: min(58vw, 62rem);
   max-width: none;
-  mix-blend-mode: darken;
   pointer-events: none;
 }
 
@@ -112,6 +111,11 @@
   border-bottom: 0;
 }
 
+.contact__links a:focus-visible {
+  outline-color: var(--cobalt);
+  outline-offset: -5px;
+}
+
 .contact__links svg {
   width: 3.75rem;
   fill: none;
@@ -141,6 +145,10 @@
 
 .contact__footer nav a {
   position: relative;
+}
+
+.contact__footer nav a:focus-visible {
+  outline-color: var(--cobalt);
 }
 
 .contact__footer nav a:not(:last-child)::after {
