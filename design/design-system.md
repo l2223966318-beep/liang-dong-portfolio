@@ -1,5 +1,11 @@
 # Portfolio Design System
 
+## Direction update
+
+- Light-first palette: warm paper and silver occupy most of the page.
+- Deep black is reserved for typography, navigation contrast, and the cinematic work sequence.
+- Chrome forms should sit in bright ambient light rather than a dark void.
+
 ## Accepted visual references
 
 - `design/concepts/hero.png` — navigation, first viewport, hero typography, hero media treatment, next-section preview.
@@ -105,4 +111,3 @@ If media fails, use a typographic fallback with the same background color and pr
 - Work rows become stacked media-and-text blocks.
 - AIGC workflow becomes a vertical ordered list.
 - Report hover cover is removed; click opens the report reader.
-
