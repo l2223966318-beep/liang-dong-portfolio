@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 
 import { App } from './App'
@@ -10,5 +11,55 @@ describe('App', () => {
     expect(
       screen.getByRole('heading', { name: /make signals matter/i }),
     ).toBeInTheDocument()
+  })
+
+  it('presents the light-first positioning and evidence-based workflow', () => {
+    render(<App />)
+
+    expect(screen.getByText('内容策略 × 品牌增长 × AIGC')).toBeInTheDocument()
+    expect(
+      screen.getByText('把复杂的信息，变成值得传播的作品。'),
+    ).toBeInTheDocument()
+    expect(screen.getByText('3h → 1h')).toBeInTheDocument()
+
+    for (const step of [
+      '热点聚合',
+      '选题生成',
+      '平台化改写',
+      '风险审核',
+      '日报整理',
+    ]) {
+      expect(screen.getByText(step)).toBeInTheDocument()
+    }
+  })
+
+  it('opens a case study and restores focus when closed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const trigger = screen.getByRole('button', {
+      name: /查看案例：世界杯热点内容系统/,
+    })
+    await user.click(trigger)
+    expect(
+      screen.getByRole('dialog', { name: /世界杯热点内容系统/ }),
+    ).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '关闭案例' }))
+    expect(trigger).toHaveFocus()
+  })
+
+  it('offers three reports, direct contact and a resume download', () => {
+    render(<App />)
+
+    expect(screen.getAllByRole('button', { name: /查看报告/ })).toHaveLength(3)
+    expect(screen.getByRole('link', { name: '下载简历' })).toHaveAttribute(
+      'href',
+      '/resume/liang-dong-resume.pdf',
+    )
+    expect(screen.getByRole('link', { name: '发送邮件' })).toHaveAttribute(
+      'href',
+      'mailto:2223966318@qq.com',
+    )
   })
 })
