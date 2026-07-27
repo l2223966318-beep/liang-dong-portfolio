@@ -16,4 +16,17 @@ describe('portfolio content', () => {
     expect(new Set(reports.map((item) => item.id)).size).toBe(3)
     expect(reports).toHaveLength(3)
   })
+
+  it('uses the V3.2 production media for projects and research covers', () => {
+    expect(projects.map((item) => item.media)).toEqual([
+      '/assets/v32/project-world-cup.webp',
+      '/assets/v32/project-beauty.webp',
+      '/assets/v32/project-city.webp',
+    ])
+    expect(reports.map((item) => item.cover)).toEqual([
+      '/assets/v32/research-beauty.webp',
+      '/assets/v32/research-world-cup.webp',
+      '/assets/v32/research-aigc.webp',
+    ])
+  })
 })

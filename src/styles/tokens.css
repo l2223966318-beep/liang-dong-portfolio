@@ -1,17 +1,20 @@
 :root {
-  --ink: #070707;
-  --paper: #f1f0eb;
-  --silver: #c9cbca;
-  --muted: #969792;
-  --signal: #ff3b1f;
-  --line-dark: rgb(7 7 7 / 22%);
-  --line-light: rgb(255 255 255 / 22%);
-  --page-gutter: clamp(1.25rem, 4.5vw, 4.5rem);
-  --section-space: clamp(5.5rem, 11vw, 11rem);
-  --display-leading: 0.82;
-  --font-display:
-    "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
-  --font-ui:
-    Inter, "Helvetica Neue", Arial, "Noto Sans SC", "Microsoft YaHei", sans-serif;
-}
+  --ink: #0d0e11;
+  --paper: #ffffff;
+  --paper-cool: #f3f4f6;
+  --cobalt: #0628bd;
+  --signal: #ef2b22;
+  --teal: #00a985;
+  --citron: #f3d900;
+  --silver: #d8dce3;
+  --hairline: rgb(13 14 17 / 18%);
+  --page-gutter: clamp(1.5rem, 3.2vw, 3.5rem);
+  --section-space: clamp(6rem, 10vw, 10rem);
+  --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --font-ui: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
 
+  /* Temporary compatibility aliases; remove after section CSS adopts V3.2 tokens. */
+  --line-dark: var(--hairline);
+  --line-light: color-mix(in srgb, var(--paper) 22%, transparent);
+  --muted: var(--silver);
+}

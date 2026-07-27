@@ -1,3 +1,5 @@
+import { productionMedia } from './media'
+
 export type Project = {
   id: 'world-cup' | 'overseas-growth' | 'city-media'
   index: string
@@ -21,6 +23,7 @@ export type Report = {
   title: string
   category: string
   summary: string
+  cover: string
   coverPosition: string
 }
 
@@ -44,7 +47,7 @@ export const projects: Project[] = [
     supportingMetrics: ['53 位 UP 主协同', '赛事热点内容运营'],
     reflection:
       '热点不只是速度竞争，更重要的是把分散信号转译成创作者能执行、用户愿意参与的内容语言。',
-    media: '/assets/case-world-cup.webp',
+    media: productionMedia.projects.worldCup,
     mediaAlt: '红银色全球信号抽象视觉',
   },
   {
@@ -66,7 +69,7 @@ export const projects: Project[] = [
     supportingMetrics: ['海外用户内容研究', '内容与站点协同'],
     reflection:
       '增长不是堆叠内容数量，而是让内容信号、用户意图与落地体验在同一条链路上对齐。',
-    media: '/assets/case-overseas-growth.webp',
+    media: productionMedia.projects.beauty,
     mediaAlt: '银灰与橙红色美妆增长抽象视觉',
   },
   {
@@ -88,7 +91,7 @@ export const projects: Project[] = [
     supportingMetrics: ['150+ 新闻与视频', '全流程影像制作'],
     reflection:
       '稳定产出来自结构化判断：先定义传播目标，再决定叙事节奏、画面信息和平台版本。',
-    media: '/assets/case-city-media.webp',
+    media: productionMedia.projects.city,
     mediaAlt: '城市影像与剪辑时间线抽象视觉',
   },
 ]
@@ -101,6 +104,7 @@ export const reports: Report[] = [
     category: 'Audience / Brand',
     summary:
       '从目标人群、内容触点和购买语境出发，梳理海外美妆内容应该回答的核心问题。',
+    cover: productionMedia.research.beauty,
     coverPosition: '0% 0%',
   },
   {
@@ -110,6 +114,7 @@ export const reports: Report[] = [
     category: 'Trend / Platform',
     summary:
       '把赛事热点、社区情绪与创作者供给放进同一张判断框架，辅助日常选题和协同。',
+    cover: productionMedia.research.worldCup,
     coverPosition: '50% 50%',
   },
   {
@@ -119,6 +124,7 @@ export const reports: Report[] = [
     category: 'AI / Workflow',
     summary:
       '以人工判断为核心，把热点聚合、选题生成、平台化改写和日报整理连接成可审核流程。',
+    cover: productionMedia.research.aigc,
     coverPosition: '100% 100%',
   },
 ]
