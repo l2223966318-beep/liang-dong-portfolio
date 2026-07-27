@@ -229,15 +229,6 @@ body:has(.report-view) .site-header {
   line-height: 1.45;
 }
 
-.hero__edition {
-  z-index: 3;
-  align-self: end;
-  justify-self: end;
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
-  writing-mode: vertical-rl;
-}
-
 .section-kicker {
   margin: 0;
   font-size: 0.66rem;
@@ -1059,12 +1050,6 @@ body:has(.report-view) .site-header {
   .hero__statement {
     max-width: 15rem;
     font-size: 0.95rem;
-  }
-
-  .hero__edition {
-    position: absolute;
-    right: var(--page-gutter);
-    bottom: 2rem;
   }
 
   .manifesto__footer {

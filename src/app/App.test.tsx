@@ -20,6 +20,14 @@ describe('App', () => {
     expect(
       screen.getByText('把复杂的信息，变成值得传播的作品。'),
     ).toBeInTheDocument()
+    expect(screen.getByText('CHENGDU · 2026')).toBeInTheDocument()
+    expect(screen.getByText('OPEN TO WORK')).toBeInTheDocument()
+    expect(screen.queryByText('PORTFOLIO / 01—26')).not.toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
+        name: '不只生产内容。 建立让内容持续生长的系统。',
+      }),
+    ).toBeInTheDocument()
     expect(screen.getByText('3h → 1h')).toBeInTheDocument()
 
     for (const step of [

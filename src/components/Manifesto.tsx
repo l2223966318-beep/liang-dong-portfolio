@@ -5,8 +5,8 @@ export function Manifesto() {
     <section className="manifesto" aria-labelledby="manifesto-title">
       <p className="section-kicker">APPROACH / 方法</p>
       <h2 id="manifesto-title">
-        <span>不止生产内容，</span>
-        <span>更建立内容发生的系统。</span>
+        <span>不只生产内容。</span>
+        <span>建立让内容持续生长的系统。</span>
       </h2>
       <div className="manifesto__footer">
         <p>

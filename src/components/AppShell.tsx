@@ -25,7 +25,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </nav>
         <span className="site-status">
           <i aria-hidden="true" />
-          AVAILABLE
+          OPEN TO WORK
         </span>
       </header>
       {children}

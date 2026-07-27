@@ -5,7 +5,7 @@ export function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero__meta">
         <p className="hero__role">内容策略 × 品牌增长 × AIGC</p>
-        <p className="hero__place">SHANGHAI · 2026</p>
+        <p className="hero__place">CHENGDU · 2026</p>
       </div>
 
       <h1 className="hero__title" id="hero-title">
@@ -22,7 +22,6 @@ export function Hero() {
       />
 
       <p className="hero__statement">把复杂的信息，变成值得传播的作品。</p>
-      <span className="hero__edition">PORTFOLIO / 01—26</span>
     </section>
   )
 }
