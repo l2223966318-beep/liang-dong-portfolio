@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react'
 
-import { AigcLab } from '../components/AigcLab'
 import { AppShell } from '../components/AppShell'
+import { Capabilities } from '../components/Capabilities'
 import { CaseStudyView } from '../components/CaseStudyView'
+import { ContactFooter } from '../components/ContactFooter'
 import { Hero } from '../components/Hero'
-import { Manifesto } from '../components/Manifesto'
-import { ProfileContact } from '../components/ProfileContact'
+import { Profile } from '../components/Profile'
 import { ReportDetailView } from '../components/ReportDetailView'
 import { ResearchIndex } from '../components/ResearchIndex'
 import { SelectedWork } from '../components/SelectedWork'
@@ -26,21 +26,21 @@ export function App() {
     <AppShell>
       <main className="app">
         <Hero />
-        <Manifesto />
+        <Profile />
         <SelectedWork
           onOpen={(project, trigger) => {
             lastTrigger.current = trigger
             setActiveProject(project)
           }}
         />
-        <AigcLab />
         <ResearchIndex
           onOpen={(report, trigger) => {
             lastTrigger.current = trigger
             setActiveReport(report)
           }}
         />
-        <ProfileContact />
+        <Capabilities />
+        <ContactFooter />
       </main>
       {activeProject ? (
         <CaseStudyView project={activeProject} onClose={closeOverlay} />

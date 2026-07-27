@@ -13,7 +13,7 @@ describe('App', () => {
     ).toBeInTheDocument()
   })
 
-  it('presents the approved hero positioning and evidence-based workflow', () => {
+  it('presents the approved hero positioning and five-chapter narrative', () => {
     render(<App />)
 
     const heroPositioning = screen.getByRole('heading', {
@@ -29,18 +29,20 @@ describe('App', () => {
     expect(screen.queryByText('PORTFOLIO / 01—26')).not.toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
-        name: '不只生产内容。 建立让内容持续生长的系统。',
+        name: '三年内容经验，从判断到落地。',
       }),
     ).toBeInTheDocument()
-    expect(screen.getByText('3h → 1h')).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', {
+        name: '既能判断方向，也能把它做出来。',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: "LET'S MAKE IT MATTER." }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText('3h → 1h')).toHaveLength(2)
 
-    for (const step of [
-      '热点聚合',
-      '选题生成',
-      '平台化改写',
-      '风险审核',
-      '日报整理',
-    ]) {
+    for (const step of ['发现信号', '组织叙事', '推动增长']) {
       expect(screen.getByText(step)).toBeInTheDocument()
     }
   })

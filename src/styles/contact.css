@@ -1,0 +1,240 @@
+.contact {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  grid-template-rows: 64fr 25fr 11fr;
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--cobalt) 0 64%, var(--paper) 64%);
+  color: var(--ink);
+}
+
+.contact__hero {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2.2rem, 4vh, 3.5rem) var(--page-gutter) 0;
+  color: var(--paper);
+}
+
+.chapter-heading--contact {
+  gap: 2.5rem;
+}
+
+.chapter-heading--contact strong,
+.chapter-heading--contact p {
+  color: var(--paper);
+}
+
+.chapter-heading--contact strong span,
+.chapter-heading--contact p {
+  color: var(--signal);
+}
+
+.chapter-heading--contact strong::after {
+  background: var(--signal);
+}
+
+.contact__hero h2 {
+  margin: clamp(2.2rem, 4.2vh, 3.8rem) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(6.5rem, 12.6vw, 13.4rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 0.82;
+}
+
+.contact__hero h2 span {
+  display: block;
+}
+
+.contact__invitation {
+  margin: 1.5rem 0 0;
+  font-size: clamp(0.95rem, 1.45vw, 1.45rem);
+  font-weight: 650;
+}
+
+.contact__availability {
+  position: absolute;
+  bottom: 0.8rem;
+  left: var(--page-gutter);
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.contact__availability::before {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 1.2rem);
+  width: var(--page-gutter);
+  height: 1px;
+  background: var(--signal);
+  content: '';
+}
+
+.contact__ring {
+  position: absolute;
+  z-index: 3;
+  top: 29%;
+  right: -4%;
+  width: min(58vw, 62rem);
+  max-width: none;
+  mix-blend-mode: darken;
+  pointer-events: none;
+}
+
+.contact__links {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 64%;
+  margin-left: calc(var(--page-gutter) * 1.65);
+  border: 1px solid var(--signal);
+  border-right: 0;
+}
+
+.contact__links a {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(2rem, 4vw, 4rem);
+  border-bottom: 1px solid var(--signal);
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.5vw, 3.7rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.contact__links a:last-child {
+  border-bottom: 0;
+}
+
+.contact__links svg {
+  width: 3.75rem;
+  fill: none;
+  stroke: var(--signal);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.2;
+}
+
+.contact__footer {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 var(--page-gutter);
+}
+
+.contact__footer nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3.2rem);
+  font-size: clamp(0.68rem, 0.9vw, 0.9rem);
+  font-weight: 700;
+}
+
+.contact__footer nav a {
+  position: relative;
+}
+
+.contact__footer nav a:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + clamp(0.75rem, 1.5vw, 1.6rem));
+  width: clamp(0.5rem, 1.3vw, 1.5rem);
+  height: 1px;
+  background: var(--signal);
+  content: '';
+}
+
+.contact__footer p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.62rem, 0.8vw, 0.82rem);
+  letter-spacing: 0.07em;
+}
+
+@media (max-width: 900px) {
+  .contact {
+    min-height: 70rem;
+    grid-template-rows: 42rem 23rem 5rem;
+    background: linear-gradient(to bottom, var(--cobalt) 0 42rem, var(--paper) 42rem);
+  }
+
+  .contact__hero h2 {
+    font-size: clamp(6rem, 18vw, 10rem);
+  }
+
+  .contact__ring {
+    top: 33%;
+    right: -38%;
+    width: 90vw;
+  }
+
+  .contact__links {
+    width: calc(100% - (var(--page-gutter) * 2));
+    margin: 0 var(--page-gutter);
+  }
+
+  .contact__footer nav {
+    gap: 1.3rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact {
+    min-height: 61rem;
+    grid-template-rows: 35rem 21rem 5rem;
+    background: linear-gradient(to bottom, var(--cobalt) 0 35rem, var(--paper) 35rem);
+  }
+
+  .contact__hero {
+    padding-top: 4.5rem;
+  }
+
+  .contact__hero h2 {
+    margin-top: 3rem;
+    font-size: clamp(4.5rem, 22vw, 6.8rem);
+  }
+
+  .contact__invitation {
+    max-width: 20rem;
+    line-height: 1.6;
+  }
+
+  .contact__availability {
+    bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .contact__ring {
+    top: 43%;
+    right: -50%;
+    width: 115vw;
+  }
+
+  .contact__links a {
+    padding: 0 1.2rem;
+    font-size: clamp(1.65rem, 8vw, 2.35rem);
+  }
+
+  .contact__links svg {
+    width: 2.5rem;
+  }
+
+  .contact__footer nav a:nth-child(3),
+  .contact__footer nav a:nth-child(4) {
+    display: none;
+  }
+
+  .contact__footer p {
+    max-width: 9rem;
+    text-align: right;
+  }
+}
