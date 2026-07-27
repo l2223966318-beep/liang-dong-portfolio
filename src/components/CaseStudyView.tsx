@@ -60,6 +60,15 @@ export function CaseStudyView({ project, onClose }: CaseStudyViewProps) {
         src={project.media}
         alt={project.mediaAlt}
         fallbackTitle={project.titleEn}
+        fallbackMark={`${project.index} / CASE STUDY`}
+        tone={
+          project.id === 'world-cup'
+            ? 'cobalt'
+            : project.id === 'overseas-growth'
+              ? 'vermilion'
+              : 'teal'
+        }
+        variant="project"
       />
 
       <div className="case-view__body">

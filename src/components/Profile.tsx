@@ -80,6 +80,9 @@ export function Profile() {
           src={productionMedia.profile}
           alt="由透明晶体切面构成的抽象身份雕塑"
           fallbackTitle="ABSTRACT IDENTITY"
+          fallbackMark="PROFILE / 01"
+          tone="cobalt"
+          variant="identity"
         />
         <p aria-hidden="true">
           <span>CHENGDU</span> · <span>2026</span>

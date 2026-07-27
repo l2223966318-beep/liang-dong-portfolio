@@ -11,3 +11,15 @@
 Final QA 在修复后重拍全部 6 张 durable evidence，并在同一 pass 用 `view_image(detail: original)` 逐对检查 5 张 concept/render，再检查 `mobile-390x844.png`。检查覆盖 visible copy、composition、condensed type/line breaks、palette、三张 teaser 的 media crop/treatment、`53 位 UP 主协同`、Profile/Work/Contact 内部 red track 与固定 page progress 的连接、next-section visibility 和 responsive collapse。
 
 Edge 四视口量测：`1700×1000`、`1440×900`、`1280×800`、`390×844` 均满足 `clientWidth === scrollWidth`，五章节存在、无 broken image、无 console/page error。
+
+## Final fix wave · 2026-07-28
+
+最终整体验收的五项 Important 已完成，并在最终源状态重拍以上 6 张 durable render：
+
+- Hero 保持 concept 的 50/50 分界、下方 Profile 预览与右下媒体控制；新混入的 8 秒环境音默认静音，画面与布局不变。
+- Selected Work 保留三张固定项目面板，同时用真实前后按钮、`02 / 03` 进度和键盘左右键控制中间主强调态。
+- Profile、项目和 Research 的图片失败状态改为继承 V3.2 色板、直角几何和 condensed type 的 code-native cover；正常媒体不受影响，失败路径由单测和路由中断 E2E 覆盖。
+- Contact 回到顶部补齐 concept 的圆形上箭头；联系行在 hover / focus-visible 时红色轨道延伸且箭头位移，reduced-motion 下无动画。
+- 旧 token aliases 与 Capabilities 硬编码 off-palette 色已移除，浏览器 theme color 与纸白画布一致。
+
+同一最终 QA pass 再次以 `view_image` 对照五张 concept 与 Hero、Profile、Selected Work、Capabilities、Contact render，并检查 `mobile-390x844.png`；未发现需要继续修改的结构、排版、颜色、媒体裁切或响应式偏差。Playwright 回归再次确认四视口均为零横向溢出、零 broken image、零 console error、零 page error。

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -82,5 +82,43 @@ describe('AppShell', () => {
     expect(screen.getByRole('button', { name: '打开导航' })).toHaveFocus()
     await user.tab()
     expect(screen.getByRole('link', { name: '联系我' })).toHaveFocus()
+  })
+
+  it('isolates focus and restores the menu button after Escape', async () => {
+    const user = userEvent.setup()
+    mockMobileViewport(true)
+    render(
+      <AppShell>
+        <main data-testid="page-content">
+          <button type="button">正文按钮</button>
+        </main>
+      </AppShell>,
+    )
+
+    const menuButton = screen.getByRole('button', { name: '打开导航' })
+    await user.click(menuButton)
+
+    await waitFor(() =>
+      expect(screen.getByRole('link', { name: '项目' })).toHaveFocus(),
+    )
+    expect(screen.getByTestId('page-content').parentElement).toHaveAttribute(
+      'inert',
+    )
+    expect(screen.getByTestId('page-content').parentElement).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    )
+
+    await user.keyboard('{Shift>}{Tab}{/Shift}')
+    expect(menuButton).toHaveFocus()
+    await user.tab()
+    expect(screen.getByRole('link', { name: '项目' })).toHaveFocus()
+    expect(screen.getByText('正文按钮')).not.toHaveFocus()
+
+    await user.keyboard('{Escape}')
+    expect(menuButton).toHaveFocus()
+    expect(screen.getByTestId('page-content').parentElement).not.toHaveAttribute(
+      'inert',
+    )
   })
 })

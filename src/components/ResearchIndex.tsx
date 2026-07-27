@@ -36,6 +36,15 @@ export function ResearchIndex({ onOpen }: ResearchIndexProps) {
               src={report.cover}
               alt=""
               fallbackTitle={report.category}
+              fallbackMark={report.index}
+              tone={
+                report.id === 'beauty-audience'
+                  ? 'vermilion'
+                  : report.id === 'world-cup-opportunity'
+                    ? 'cobalt'
+                    : 'teal'
+              }
+              variant="research"
             />
             <span className="research__index">
               {report.index.replace('R.', '')}<i>.</i>

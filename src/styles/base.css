@@ -105,6 +105,102 @@ img {
   max-width: 100%;
 }
 
+.media-fallback {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 8rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1rem, 2vw, 2rem);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: 0;
+  background: var(--paper-cool);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.media-fallback::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, currentColor 15%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, currentColor 15%, transparent) 1px, transparent 1px);
+  background-size: clamp(2.5rem, 7vw, 7rem) clamp(2.5rem, 7vw, 7rem);
+  content: '';
+}
+
+.media-fallback::after {
+  position: absolute;
+  z-index: -1;
+  right: -8%;
+  bottom: -24%;
+  width: 62%;
+  aspect-ratio: 1;
+  border: clamp(1rem, 4vw, 4rem) solid color-mix(in srgb, currentColor 32%, transparent);
+  content: '';
+  transform: rotate(34deg);
+}
+
+.media-fallback__mark,
+.media-fallback__signal {
+  font-family: var(--font-display);
+  font-size: clamp(0.65rem, 0.9vw, 0.9rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.media-fallback__title {
+  max-width: 12ch;
+  margin: auto 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.media-fallback__signal {
+  align-self: flex-end;
+  color: var(--signal);
+}
+
+.media-fallback--cobalt {
+  background: color-mix(in srgb, var(--cobalt) 88%, var(--ink));
+  color: var(--paper);
+}
+
+.media-fallback--vermilion {
+  background: color-mix(in srgb, var(--signal) 90%, var(--ink));
+  color: var(--paper);
+}
+
+.media-fallback--teal {
+  background: color-mix(in srgb, var(--teal) 84%, var(--cobalt));
+  color: var(--paper);
+}
+
+.media-fallback--citron {
+  background: var(--citron);
+  color: var(--ink);
+}
+
+.media-fallback--silver {
+  background: color-mix(in srgb, var(--silver) 72%, var(--paper));
+}
+
+.media-fallback--ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.media-fallback--research .media-fallback__title {
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+}
+
 ::selection {
   background: var(--signal);
   color: #fff;

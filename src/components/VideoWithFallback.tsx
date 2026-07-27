@@ -1,25 +1,71 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useMotionPreference } from '../hooks/useMotionPreference'
+import { MediaWithFallback } from './MediaWithFallback'
 
 type Props = {
   src: string
   poster: string
   label: string
   className?: string
+  hasAudio?: boolean
 }
 
-export function VideoWithFallback({ src, poster, label, className }: Props) {
+type NavigatorWithConnection = Navigator & {
+  connection?: {
+    saveData?: boolean
+  }
+}
+
+export function VideoWithFallback({
+  src,
+  poster,
+  label,
+  className,
+  hasAudio = false,
+}: Props) {
   const ref = useRef<HTMLVideoElement>(null)
   const reducedMotion = useMotionPreference()
   const [paused, setPaused] = useState(false)
   const [muted, setMuted] = useState(true)
   const [failed, setFailed] = useState(false)
+  const saveData =
+    typeof navigator !== 'undefined' &&
+    Boolean((navigator as NavigatorWithConnection).connection?.saveData)
+  const showPoster = failed || reducedMotion || saveData
 
-  if (failed || reducedMotion) {
+  useEffect(() => {
+    if (showPoster) return
+
+    const video = ref.current
+    if (!video) return
+    let active = true
+
+    try {
+      const playback = video.play()
+      playback?.catch(() => {
+        if (active) setFailed(true)
+      })
+    } catch {
+      setFailed(true)
+    }
+
+    return () => {
+      active = false
+    }
+  }, [showPoster, src])
+
+  if (showPoster) {
     return (
       <div className={className}>
-        <img src={poster} alt={label} />
+        <MediaWithFallback
+          src={poster}
+          alt={label}
+          fallbackTitle="STATIC MEDIA"
+          fallbackMark="HERO / 00"
+          tone="silver"
+          variant="editorial"
+        />
       </div>
     )
   }
@@ -28,10 +74,17 @@ export function VideoWithFallback({ src, poster, label, className }: Props) {
     const video = ref.current
     if (!video) return
 
-    if (paused) await video.play()
-    else video.pause()
-
-    setPaused(!paused)
+    if (paused) {
+      try {
+        await video.play()
+        setPaused(false)
+      } catch {
+        setFailed(true)
+      }
+    } else {
+      video.pause()
+      setPaused(true)
+    }
   }
 
   return (
@@ -44,6 +97,9 @@ export function VideoWithFallback({ src, poster, label, className }: Props) {
         loop
         playsInline
         autoPlay
+        preload="metadata"
+        onPlay={() => setPaused(false)}
+        onPause={() => setPaused(true)}
         onError={() => setFailed(true)}
         aria-label={label}
       />
@@ -59,19 +115,21 @@ export function VideoWithFallback({ src, poster, label, className }: Props) {
             aria-hidden="true"
           />
         </button>
-        <button
-          className="hero__control hero__control--sound"
-          type="button"
-          onClick={() => setMuted((value) => !value)}
-          aria-label={muted ? '开启背景声音' : '静音背景视频'}
-        >
-          <span
-            className={muted ? 'sound-icon is-muted' : 'sound-icon'}
-            aria-hidden="true"
+        {hasAudio ? (
+          <button
+            className="hero__control hero__control--sound"
+            type="button"
+            onClick={() => setMuted((value) => !value)}
+            aria-label={muted ? '开启背景声音' : '静音背景视频'}
           >
-            <i />
-          </span>
-        </button>
+            <span
+              className={muted ? 'sound-icon is-muted' : 'sound-icon'}
+              aria-hidden="true"
+            >
+              <i />
+            </span>
+          </button>
+        ) : null}
       </div>
     </div>
   )

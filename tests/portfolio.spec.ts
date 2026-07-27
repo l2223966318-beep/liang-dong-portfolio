@@ -132,7 +132,7 @@ test('mobile first viewport stays readable without horizontal overflow', async (
   expect(dimensions.scrollWidth).toBe(dimensions.clientWidth)
   await expect(page.getByText('让内容成为增长资产')).toBeVisible()
 
-  const menu = page.getByRole('button', { name: '打开导航' })
+  const menu = page.locator('.site-menu')
   await menu.focus()
   await page.keyboard.press('Enter')
   await expect(page.getByRole('navigation', { name: '作品集主导航' })).toBeVisible()
@@ -214,4 +214,182 @@ test('runtime motion preference changes clean up and rebuild enhancements', asyn
   await expect(profileImage).toHaveAttribute('style', /transform/)
   await expect(progress).toHaveAttribute('style', /transform/)
   await expect.poll(() => getScrollTriggerCount(page)).toBe(initialTriggerCount)
+})
+
+test('browser Back closes project and report overlays without losing scroll or focus', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 })
+  await page.goto('/')
+
+  const projectTrigger = page.getByRole('button', {
+    name: '查看案例：世界杯热点内容系统',
+  })
+  await projectTrigger.scrollIntoViewIfNeeded()
+  const projectScroll = await page.evaluate(() => window.scrollY)
+  await projectTrigger.focus()
+  await page.keyboard.press('Enter')
+  await expect(
+    page.getByRole('dialog', { name: '世界杯热点内容系统' }),
+  ).toBeVisible()
+  await page.goBack()
+  await expect(
+    page.getByRole('dialog', { name: '世界杯热点内容系统' }),
+  ).toHaveCount(0)
+  await expect(projectTrigger).toBeFocused()
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBe(projectScroll)
+
+  const reportTrigger = page.getByRole('button', {
+    name: '查看报告：海外美妆人群洞察',
+  })
+  await reportTrigger.scrollIntoViewIfNeeded()
+  const reportScroll = await page.evaluate(() => window.scrollY)
+  await reportTrigger.focus()
+  await page.keyboard.press('Enter')
+  await expect(
+    page.getByRole('dialog', { name: '海外美妆人群洞察' }),
+  ).toBeVisible()
+  await page.goBack()
+  await expect(
+    page.getByRole('dialog', { name: '海外美妆人群洞察' }),
+  ).toHaveCount(0)
+  await expect(reportTrigger).toBeFocused()
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBe(reportScroll)
+})
+
+test('mobile menu isolates focus and restores scroll after Escape', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await page.getByRole('heading', {
+    name: '项目不是陈列，是问题与结果的连接。',
+  }).scrollIntoViewIfNeeded()
+  const scrollBeforeMenu = await page.evaluate(() => window.scrollY)
+
+  const menu = page.locator('.site-menu')
+  await menu.click()
+  await expect(page.getByRole('link', { name: '项目', exact: true }).first()).toBeFocused()
+  await expect
+    .poll(() =>
+      page.evaluate(() => ({
+        overflow: document.body.style.overflow,
+        position: document.body.style.position,
+      })),
+    )
+    .toEqual({ overflow: 'hidden', position: 'fixed' })
+  await expect(page.locator('.site-content')).toHaveAttribute('inert', '')
+
+  await page.keyboard.press('Shift+Tab')
+  await expect(menu).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('link', { name: '项目', exact: true }).first()).toBeFocused()
+  await page.keyboard.press('Escape')
+
+  await expect(menu).toBeFocused()
+  await expect(page.locator('.site-content')).not.toHaveAttribute('inert')
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY))
+    .toBe(scrollBeforeMenu)
+})
+
+test('profile, project and research media failures show code-native covers', async ({
+  page,
+}) => {
+  const failedAssets = new Set([
+    'profile-bust.webp',
+    'project-world-cup.webp',
+    'research-beauty.webp',
+  ])
+  await page.route('**/assets/v32/*.webp', async (route) => {
+    const fileName = new URL(route.request().url()).pathname.split('/').at(-1)
+    if (fileName && failedAssets.has(fileName)) await route.abort()
+    else await route.continue()
+  })
+  await page.goto('/')
+
+  const profileFallback = page.locator('.profile .media-fallback')
+  await profileFallback.scrollIntoViewIfNeeded()
+  await expect(profileFallback).toBeVisible()
+  await expect(profileFallback).toHaveAttribute(
+    'aria-label',
+    '由透明晶体切面构成的抽象身份雕塑',
+  )
+
+  const projectFallback = page.locator('.work-card .media-fallback').first()
+  await projectFallback.scrollIntoViewIfNeeded()
+  await expect(projectFallback).toBeVisible()
+  await expect(projectFallback).toHaveAttribute(
+    'aria-label',
+    '红银色全球信号抽象视觉',
+  )
+
+  const researchFallback = page.locator('.research .media-fallback').first()
+  await researchFallback.scrollIntoViewIfNeeded()
+  await expect(researchFallback).toBeVisible()
+  await expect(researchFallback).toHaveAttribute('aria-hidden', 'true')
+  await expect(researchFallback).not.toHaveAttribute('role')
+})
+
+test('Selected Work controls update active project without hiding the sequence', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1700, height: 1000 })
+  await page.goto('/')
+
+  const projects = page.locator('.work-card')
+  await expect(projects).toHaveCount(3)
+  await expect(projects.nth(1)).toHaveAttribute('aria-current', 'true')
+  await expect(page.getByText('02 / 03')).toBeVisible()
+
+  await page.getByRole('button', { name: '下一个项目' }).click()
+  await expect(projects.nth(2)).toHaveAttribute('aria-current', 'true')
+  await expect(projects).toHaveCount(3)
+
+  const sequence = page.getByRole('group', { name: '项目选择' })
+  await sequence.focus()
+  await page.keyboard.press('ArrowLeft')
+  await expect(projects.nth(1)).toHaveAttribute('aria-current', 'true')
+})
+
+test('approved viewports have no console errors, broken images or horizontal overflow', async ({
+  page,
+}) => {
+  const consoleErrors: string[] = []
+  const pageErrors: string[] = []
+  page.on('console', (message) => {
+    if (message.type() === 'error') consoleErrors.push(message.text())
+  })
+  page.on('pageerror', (error) => pageErrors.push(error.message))
+
+  for (const viewport of [
+    { width: 1700, height: 1000 },
+    { width: 1440, height: 900 },
+    { width: 1280, height: 800 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await page.goto('/')
+    await page.waitForLoadState('networkidle')
+
+    const health = await page.evaluate(() => ({
+      brokenImages: Array.from(document.images)
+        .filter((image) => image.complete && image.naturalWidth === 0)
+        .map((image) => image.currentSrc || image.src),
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }))
+
+    expect(health.brokenImages, `${viewport.width}×${viewport.height}`).toEqual([])
+    expect(health.scrollWidth, `${viewport.width}×${viewport.height}`).toBeLessThanOrEqual(
+      health.clientWidth,
+    )
+  }
+
+  expect(consoleErrors).toEqual([])
+  expect(pageErrors).toEqual([])
 })

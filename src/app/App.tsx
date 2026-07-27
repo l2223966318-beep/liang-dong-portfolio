@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { AppShell } from '../components/AppShell'
 import { Capabilities } from '../components/Capabilities'
@@ -14,12 +14,71 @@ export function App() {
   const [activeProject, setActiveProject] = useState<Project | null>(null)
   const [activeReport, setActiveReport] = useState<Report | null>(null)
   const lastTrigger = useRef<HTMLButtonElement | null>(null)
+  const overlayHistoryMarker = useRef<string | null>(null)
+  const overlaySequence = useRef(0)
 
-  const closeOverlay = () => {
+  const closeOverlayState = useCallback(() => {
     setActiveProject(null)
     setActiveReport(null)
-    lastTrigger.current?.focus()
-  }
+    window.requestAnimationFrame(() => lastTrigger.current?.focus())
+  }, [])
+
+  const closeOverlay = useCallback(() => {
+    const marker = overlayHistoryMarker.current
+
+    if (marker && window.history.state?.portfolioOverlay === marker) {
+      window.history.back()
+      return
+    }
+
+    overlayHistoryMarker.current = null
+    closeOverlayState()
+  }, [closeOverlayState])
+
+  const openOverlay = useCallback(
+    (
+      type: 'project' | 'report',
+      item: Project | Report,
+      trigger: HTMLButtonElement,
+    ) => {
+      const marker = `${type}:${item.id}:${overlaySequence.current += 1}`
+      const currentState =
+        window.history.state && typeof window.history.state === 'object'
+          ? window.history.state
+          : {}
+
+      lastTrigger.current = trigger
+      overlayHistoryMarker.current = marker
+      window.history.pushState(
+        { ...currentState, portfolioOverlay: marker },
+        '',
+        window.location.href,
+      )
+
+      if (type === 'project') {
+        setActiveReport(null)
+        setActiveProject(item as Project)
+      } else {
+        setActiveProject(null)
+        setActiveReport(item as Report)
+      }
+    },
+    [],
+  )
+
+  useEffect(() => {
+    const closeOnHistoryNavigation = (event: PopStateEvent) => {
+      const marker = overlayHistoryMarker.current
+      if (!marker || event.state?.portfolioOverlay === marker) return
+
+      overlayHistoryMarker.current = null
+      closeOverlayState()
+    }
+
+    window.addEventListener('popstate', closeOnHistoryNavigation)
+    return () =>
+      window.removeEventListener('popstate', closeOnHistoryNavigation)
+  }, [closeOverlayState])
 
   return (
     <AppShell>
@@ -27,14 +86,12 @@ export function App() {
         <Hero />
         <Profile />
         <SelectedWork
-          onOpenProject={(project, trigger) => {
-            lastTrigger.current = trigger
-            setActiveProject(project)
-          }}
-          onOpenReport={(report, trigger) => {
-            lastTrigger.current = trigger
-            setActiveReport(report)
-          }}
+          onOpenProject={(project, trigger) =>
+            openOverlay('project', project, trigger)
+          }
+          onOpenReport={(report, trigger) =>
+            openOverlay('report', report, trigger)
+          }
         />
         <Capabilities />
         <ContactFooter />

@@ -19,4 +19,14 @@ describe('ContactFooter', () => {
       '/resume/liang-dong-resume.pdf',
     )
   })
+
+  it('shows the approved circular up-arrow without changing the link name', () => {
+    render(<ContactFooter />)
+
+    const backToTop = screen.getByRole('link', { name: '回到顶部' })
+    expect(backToTop).toHaveAttribute('href', '#top')
+    expect(
+      backToTop.querySelector('.contact__back-top-icon'),
+    ).toHaveAttribute('aria-hidden', 'true')
+  })
 })

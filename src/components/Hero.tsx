@@ -9,6 +9,7 @@ export function Hero() {
         src={productionMedia.hero.video}
         poster={productionMedia.hero.poster}
         label="彩色透明材质动态背景"
+        hasAudio
       />
       <p className="hero__mark">
         <span>LD</span> / 26

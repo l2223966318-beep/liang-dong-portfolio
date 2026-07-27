@@ -1,0 +1,2 @@
+{"id":"bgm_001","type":"bgm","path":".media/audio/bgm/bgm_001.wav","source":"ingested","description":"portfolio-v32-ambient.wav","provenance":{"provider":"local","from":"C:\\Users\\dell\\AppData\\Local\\Temp\\portfolio-v32-ambient.wav"}}
+{"id":"video_001","type":"video","path":".media/video/video_001.mp4","source":"ingested","description":"hero-loop.mp4","provenance":{"provider":"local","from":".\\public\\assets\\v32\\hero-loop.mp4"}}

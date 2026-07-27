@@ -18,6 +18,19 @@ function ArrowIcon() {
   )
 }
 
+function BackToTopIcon() {
+  return (
+    <svg
+      className="contact__back-top-icon"
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+    >
+      <circle cx="16" cy="16" r="14.5" />
+      <path d="M16 23V9m-6 6 6-6 6 6" />
+    </svg>
+  )
+}
+
 export function ContactFooter() {
   return (
     <footer className="contact" id="contact" aria-labelledby="contact-title">
@@ -77,6 +90,7 @@ export function ContactFooter() {
         <nav aria-label="页脚导航">
           {footerNavigation.map(([label, href]) => (
             <a key={href} href={href}>
+              {label === '回到顶部' ? <BackToTopIcon /> : null}
               {label}
             </a>
           ))}

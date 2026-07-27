@@ -54,6 +54,11 @@ export function Capabilities() {
               src={mediaByTone[capability.tone]}
               alt={`${capability.title}能力视觉`}
               fallbackTitle={capability.title}
+              fallbackMark={`CAPABILITY / ${capability.index}`}
+              tone={
+                capability.tone === 'silver' ? 'silver' : capability.tone
+              }
+              variant="capability"
             />
           </article>
         ))}

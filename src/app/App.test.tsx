@@ -1,10 +1,14 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { App } from './App'
 
 describe('App', () => {
+  beforeEach(() => {
+    window.history.replaceState({}, '', '/')
+  })
+
   it('renders the approved portfolio statement', () => {
     render(<App />)
 
@@ -60,7 +64,38 @@ describe('App', () => {
     ).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: '关闭案例' }))
-    expect(trigger).toHaveFocus()
+    await waitFor(() => expect(trigger).toHaveFocus())
+  })
+
+  it('uses browser history to close project and report overlays', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const projectTrigger = screen.getByRole('button', {
+      name: /查看案例：世界杯热点内容系统/,
+    })
+    await user.click(projectTrigger)
+    expect(window.history.state).toHaveProperty('portfolioOverlay')
+    window.history.back()
+    await waitFor(() =>
+      expect(
+        screen.queryByRole('dialog', { name: /世界杯热点内容系统/ }),
+      ).not.toBeInTheDocument(),
+    )
+    expect(projectTrigger).toHaveFocus()
+
+    const reportTrigger = screen.getByRole('button', {
+      name: /查看报告：海外美妆人群洞察/,
+    })
+    await user.click(reportTrigger)
+    expect(window.history.state).toHaveProperty('portfolioOverlay')
+    window.history.back()
+    await waitFor(() =>
+      expect(
+        screen.queryByRole('dialog', { name: /海外美妆人群洞察/ }),
+      ).not.toBeInTheDocument(),
+    )
+    expect(reportTrigger).toHaveFocus()
   })
 
   it('offers three reports, direct contact and a resume download', () => {

@@ -12,9 +12,4 @@
   --section-space: clamp(6rem, 10vw, 10rem);
   --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
   --font-ui: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
-
-  /* Temporary compatibility aliases; remove after section CSS adopts V3.2 tokens. */
-  --line-dark: var(--hairline);
-  --line-light: color-mix(in srgb, var(--paper) 22%, transparent);
-  --muted: var(--silver);
 }
