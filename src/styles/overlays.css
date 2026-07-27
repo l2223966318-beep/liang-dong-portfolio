@@ -232,7 +232,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .case-view__hero,
   .case-view__body section {
     grid-template-columns: 1fr;

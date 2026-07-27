@@ -9,7 +9,7 @@ const navItems = [
   ['关于', '#profile'],
 ] as const
 
-const mobileNavigationQuery = '(max-width: 900px)'
+const mobileNavigationQuery = '(max-width: 760px)'
 
 export function AppShell({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)

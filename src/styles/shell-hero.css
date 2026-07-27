@@ -135,6 +135,10 @@ body:has(.report-view) .site-header {
   display: block;
 }
 
+.has-motion .hero__title {
+  overflow: hidden;
+}
+
 .hero__media {
   position: absolute;
   z-index: 0;
@@ -335,7 +339,7 @@ body:has(.report-view) .site-header {
   letter-spacing: 0.15em;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
   .site-header {
     position: fixed;
     width: 100%;

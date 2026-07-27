@@ -9,7 +9,7 @@ function mockMobileViewport(matches: boolean) {
     configurable: true,
     value: vi.fn((query: string) => ({
       matches:
-        query === '(max-width: 900px)'
+        query === '(max-width: 760px)'
           ? matches
           : query === '(prefers-reduced-motion: reduce)',
       addEventListener: vi.fn(),

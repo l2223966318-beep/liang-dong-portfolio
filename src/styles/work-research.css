@@ -357,7 +357,7 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 760px) {
   .work__heading {
     grid-template-columns: 1fr;
   }

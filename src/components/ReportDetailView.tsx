@@ -16,6 +16,10 @@ export function ReportDetailView({ report, onClose }: ReportDetailViewProps) {
     closeButton.current?.focus()
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
+      if (event.key === 'Tab') {
+        event.preventDefault()
+        closeButton.current?.focus()
+      }
     }
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)

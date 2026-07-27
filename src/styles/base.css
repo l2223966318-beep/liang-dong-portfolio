@@ -20,6 +20,36 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.motion-root {
+  min-width: 0;
+  overflow: clip;
+}
+
+.page-track {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  right: 0.75rem;
+  display: none;
+  width: 2px;
+  height: 100svh;
+  background: rgb(239 43 34 / 18%);
+  pointer-events: none;
+}
+
+.has-motion .page-track {
+  display: block;
+}
+
+.page-track__progress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--signal);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
 button,
 a {
   font: inherit;
@@ -80,12 +110,16 @@ img {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 760px) {
   .section-heading {
     align-items: flex-start;
   }
 
   .section-heading h2 {
     font-size: 4.1rem;
+  }
+
+  .page-track {
+    right: 0.35rem;
   }
 }

@@ -36,13 +36,9 @@ export function Profile() {
           <p>/ PROFILE</p>
         </header>
 
-        <h2
-          id="profile-title"
-          aria-label="三年内容经验，从判断到落地。"
-        >
-          三年内容经验，
-          <br />
-          从判断到落地。
+        <h2 id="profile-title" aria-label="三年内容经验，从判断到落地。">
+          <span>三年内容经验，</span>
+          <span>从判断到落地。</span>
         </h2>
         <p className="profile__statement">
           THINK <span>/</span> MAKE <span>/</span> GROW
