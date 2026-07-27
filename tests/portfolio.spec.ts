@@ -195,5 +195,8 @@ test('runtime motion preference changes clean up and rebuild enhancements', asyn
   await expect(
     page.getByRole('button', { name: '暂停背景视频' }),
   ).toBeVisible()
+  await expect(heroLine).toHaveAttribute('style', /transform/)
+  await expect(profileImage).toHaveAttribute('style', /transform/)
+  await expect(progress).toHaveAttribute('style', /transform/)
   await expect.poll(() => getScrollTriggerCount(page)).toBe(initialTriggerCount)
 })
