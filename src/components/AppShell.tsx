@@ -9,8 +9,27 @@ const navItems = [
   ['关于', '#profile'],
 ] as const
 
+const mobileNavigationQuery = '(max-width: 900px)'
+
 export function AppShell({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [mobileNavigation, setMobileNavigation] = useState(() =>
+    typeof window.matchMedia === 'function'
+      ? window.matchMedia(mobileNavigationQuery).matches
+      : false,
+  )
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return
+
+    const mediaQuery = window.matchMedia(mobileNavigationQuery)
+    const updateNavigationMode = () => setMobileNavigation(mediaQuery.matches)
+    updateNavigationMode()
+    mediaQuery.addEventListener('change', updateNavigationMode)
+
+    return () =>
+      mediaQuery.removeEventListener('change', updateNavigationMode)
+  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -22,6 +41,8 @@ export function AppShell({ children }: { children: ReactNode }) {
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
   }, [menuOpen])
+
+  const navigationClosed = mobileNavigation && !menuOpen
 
   return (
     <MotionProvider>
@@ -41,9 +62,16 @@ export function AppShell({ children }: { children: ReactNode }) {
           className={menuOpen ? 'site-nav is-open' : 'site-nav'}
           id="primary-navigation"
           aria-label="作品集主导航"
+          aria-hidden={navigationClosed || undefined}
+          inert={navigationClosed || undefined}
         >
           {navItems.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setMenuOpen(false)}>
+            <a
+              key={href}
+              href={href}
+              tabIndex={navigationClosed ? -1 : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
               {label}
             </a>
           ))}
