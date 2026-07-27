@@ -1,32 +1,56 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import { MotionProvider } from './MotionProvider'
 
 const navItems = [
-  ['WORK', '#work'],
-  ['LAB', '#lab'],
-  ['RESEARCH', '#research'],
-  ['PROFILE', '#profile'],
+  ['项目', '#work'],
+  ['AIGC', '#capabilities'],
+  ['研究', '#research'],
+  ['关于', '#profile'],
 ] as const
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
+
   return (
     <MotionProvider>
       <header className="site-header">
-        <a className="site-mark" href="#top" aria-label="返回首页">
-          LD<sup>®</sup>
-        </a>
-        <nav className="site-nav" aria-label="作品集主导航">
+        <button
+          className="site-menu"
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          aria-label={menuOpen ? '关闭导航' : '打开导航'}
+          onClick={() => setMenuOpen((value) => !value)}
+        >
+          <span />
+          <span />
+        </button>
+        <nav
+          className={menuOpen ? 'site-nav is-open' : 'site-nav'}
+          id="primary-navigation"
+          aria-label="作品集主导航"
+        >
           {navItems.map(([label, href]) => (
-            <a key={label} href={href}>
+            <a key={href} href={href} onClick={() => setMenuOpen(false)}>
               {label}
             </a>
           ))}
         </nav>
-        <span className="site-status">
-          <i aria-hidden="true" />
-          OPEN TO WORK
-        </span>
+        <a className="site-contact" href="#contact">
+          联系我
+        </a>
       </header>
       {children}
     </MotionProvider>

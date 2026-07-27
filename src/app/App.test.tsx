@@ -13,15 +13,19 @@ describe('App', () => {
     ).toBeInTheDocument()
   })
 
-  it('presents the light-first positioning and evidence-based workflow', () => {
+  it('presents the approved hero positioning and evidence-based workflow', () => {
     render(<App />)
 
-    expect(screen.getByText('内容策略 × 品牌增长 × AIGC')).toBeInTheDocument()
-    expect(
-      screen.getByText('把复杂的信息，变成值得传播的作品。'),
-    ).toBeInTheDocument()
+    const heroPositioning = screen.getByRole('heading', {
+      name: '让内容成为增长资产',
+    }).parentElement
+    expect(heroPositioning).toHaveTextContent('内容策略 × 品牌增长 × AIGC')
+    expect(screen.getByRole('link', { name: '查看项目' })).toHaveAttribute(
+      'href',
+      '#work',
+    )
     expect(screen.getByText('CHENGDU · 2026')).toBeInTheDocument()
-    expect(screen.getByText('OPEN TO WORK')).toBeInTheDocument()
+    expect(screen.queryByText('OPEN TO WORK')).not.toBeInTheDocument()
     expect(screen.queryByText('PORTFOLIO / 01—26')).not.toBeInTheDocument()
     expect(
       screen.getByRole('heading', {

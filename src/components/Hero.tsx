@@ -1,27 +1,34 @@
-import { MediaWithFallback } from './MediaWithFallback'
+import { productionMedia } from '../data/media'
+import { VideoWithFallback } from './VideoWithFallback'
 
 export function Hero() {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
-      <div className="hero__meta">
-        <p className="hero__role">内容策略 × 品牌增长 × AIGC</p>
-        <p className="hero__place">CHENGDU · 2026</p>
-      </div>
-
-      <h1 className="hero__title" id="hero-title">
+      <VideoWithFallback
+        className="hero__media"
+        src={productionMedia.hero.video}
+        poster={productionMedia.hero.poster}
+        label="彩色透明材质动态背景"
+      />
+      <p className="hero__mark">
+        <span>LD</span> / 26
+      </p>
+      <h1 id="hero-title" className="hero__title">
         <span>MAKE</span>
         <span>SIGNALS</span>
         <span>MATTER.</span>
       </h1>
-
-      <MediaWithFallback
-        className="hero__media"
-        src="/assets/hero-metal.webp"
-        alt="明亮银灰环境中的抽象金属形态"
-        fallbackTitle="LD / 2026"
-      />
-
-      <p className="hero__statement">把复杂的信息，变成值得传播的作品。</p>
+      <div className="hero__position">
+        <h2>让内容成为增长资产</h2>
+        <p>
+          内容策略 <span>×</span> 品牌增长 <span>×</span> AIGC
+        </p>
+        <a href="#work">
+          <span aria-hidden="true">→</span>
+          查看项目
+        </a>
+      </div>
+      <p className="hero__place">CHENGDU · 2026</p>
     </section>
   )
 }
