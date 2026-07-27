@@ -1,0 +1,439 @@
+.work {
+  position: relative;
+  padding: clamp(3.5rem, 6vw, 6rem) var(--page-gutter) 2.25rem;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.work__heading {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.42fr) 1.58fr;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.work__heading .section-index {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  margin: 0;
+  color: var(--signal);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.45vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.work__heading .section-index strong {
+  position: relative;
+  color: var(--ink);
+  font-size: clamp(4.8rem, 7.2vw, 7.4rem);
+  font-weight: 900;
+  letter-spacing: -0.09em;
+  line-height: 0.76;
+}
+
+.work__heading .section-index strong::after {
+  position: absolute;
+  right: 0;
+  bottom: -1rem;
+  left: 0;
+  height: 0.22rem;
+  background: var(--signal);
+  content: '';
+}
+
+.work__heading .section-index strong span {
+  color: var(--signal);
+}
+
+.work__heading h2 {
+  margin: 0;
+  font-size: clamp(2.3rem, 3.2vw, 3.75rem);
+  font-weight: 850;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.work__projects {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 0.68fr;
+  gap: 0.5rem;
+}
+
+.work-card {
+  position: relative;
+  min-height: clamp(30rem, 56vw, 44rem);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  background: var(--ink);
+  color: var(--paper);
+  isolation: isolate;
+}
+
+.work-card::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(5 8 16 / 28%) 0%, transparent 38%),
+    linear-gradient(0deg, rgb(5 8 16 / 82%) 0%, transparent 52%);
+  content: '';
+  pointer-events: none;
+}
+
+.work-card__media {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0, 1);
+}
+
+.work-card:hover .work-card__media {
+  transform: scale(1.025);
+}
+
+.work-card__index,
+.work-card__copy,
+.work-card__metric,
+.work-card__action {
+  position: absolute;
+  z-index: 1;
+  right: clamp(1.5rem, 2.4vw, 2.5rem);
+  left: clamp(1.5rem, 2.4vw, 2.5rem);
+}
+
+.work-card__index {
+  top: clamp(1.25rem, 2.4vw, 2.4rem);
+  font-family: var(--font-display);
+  font-size: clamp(4.3rem, 6.8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.075em;
+  line-height: 0.8;
+}
+
+.work-card__index i {
+  color: var(--signal);
+  font-style: normal;
+}
+
+.work-card__copy {
+  top: clamp(7.5rem, 10vw, 10.5rem);
+}
+
+.work-card__copy h3 {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.15vw, 2.55rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.work-card__copy p {
+  max-width: 33rem;
+  margin: 0.9rem 0 0;
+  font-size: clamp(0.72rem, 0.9vw, 0.95rem);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.work-card__metric {
+  bottom: 5.3rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.8vw, 3.45rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.work-card__action {
+  bottom: 1.5rem;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.work-card__action svg,
+.research__copy svg {
+  width: 2.75rem;
+  height: 1rem;
+  overflow: visible;
+  fill: none;
+  stroke: var(--signal);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.5;
+  transition: transform 250ms ease;
+}
+
+.work-card__action:hover svg,
+.research__list button:hover .research__copy svg {
+  transform: translateX(0.35rem);
+}
+
+.work-card:nth-child(2) {
+  z-index: 1;
+  border: 2px solid var(--signal);
+  background: var(--paper-cool);
+  color: var(--ink);
+  transform: translateY(-0.4rem);
+}
+
+.work-card:nth-child(2)::after {
+  background: linear-gradient(180deg, rgb(255 255 255 / 42%), transparent 40%);
+}
+
+.work-card:nth-child(2) .work-card__metric {
+  right: 38%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  min-height: 8rem;
+  align-items: center;
+  padding: 1.15rem 1.5rem;
+  background: var(--signal);
+  color: var(--paper);
+  font-size: clamp(2.1rem, 3.4vw, 4rem);
+}
+
+.work-card:nth-child(2) .work-card__action {
+  right: 0;
+  bottom: 0;
+  left: 62%;
+  min-height: 8rem;
+  padding: 1.15rem 1.5rem;
+  background: var(--signal);
+  color: var(--paper);
+}
+
+.work-card:nth-child(2) .work-card__action svg {
+  stroke: currentColor;
+}
+
+.work-card:nth-child(3) .work-card__copy h3 {
+  font-size: clamp(1.4rem, 1.85vw, 2.2rem);
+}
+
+.work-card:nth-child(3) .work-card__metric {
+  font-size: clamp(1.45rem, 2.2vw, 2.7rem);
+}
+
+.research {
+  display: grid;
+  grid-template-columns: clamp(8.5rem, 12vw, 12rem) minmax(0, 1fr);
+  margin-top: 1rem;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.research__heading {
+  padding: 1.4rem 1.25rem 1.4rem 0;
+  border-right: 1px solid var(--hairline);
+}
+
+.research__heading h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.1vw, 2.3rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+}
+
+.research__heading h2::after {
+  display: block;
+  width: 5.8rem;
+  height: 0.15rem;
+  margin-top: 1.2rem;
+  background: var(--signal);
+  content: '';
+}
+
+.research__heading span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--signal);
+  font-size: 0.72em;
+}
+
+.research__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hairline);
+}
+
+.research__list button {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(6.8rem, 0.72fr) minmax(0, 1.28fr);
+  gap: 1rem;
+  align-items: stretch;
+  padding: 1.25rem;
+  border: 0;
+  border-right: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.research__list button:last-child {
+  border-right: 0;
+}
+
+.research__media {
+  width: 100%;
+  height: 100%;
+  min-height: 8.75rem;
+  object-fit: cover;
+}
+
+.research__index {
+  display: none;
+}
+
+.research__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 0.25rem;
+}
+
+.research__copy > strong {
+  font-size: clamp(0.95rem, 1.15vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.research__copy > strong::before {
+  margin-right: 0.6rem;
+  color: var(--signal);
+  content: '0' counter(report);
+}
+
+.research__list {
+  counter-reset: report;
+}
+
+.research__list button {
+  counter-increment: report;
+}
+
+.research__copy small {
+  margin-top: 0.75rem;
+  color: rgb(13 14 17 / 58%);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+
+.research__copy > span {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: auto;
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+@media (min-width: 1500px) and (max-height: 1050px) {
+  .work-card {
+    min-height: 30.5rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .work__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .work__heading h2 {
+    max-width: 17ch;
+  }
+
+  .work__projects {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card,
+  .work-card:nth-child(2) {
+    min-height: clamp(30rem, 90vw, 42rem);
+    transform: none;
+  }
+
+  .work-card:nth-child(3) .work-card__copy h3 {
+    font-size: clamp(1.55rem, 4.5vw, 2.55rem);
+  }
+
+  .research {
+    grid-template-columns: 1fr;
+  }
+
+  .research__heading {
+    border-right: 0;
+  }
+
+  .research__list {
+    grid-template-columns: 1fr;
+  }
+
+  .research__list button {
+    min-height: 11rem;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    border-top: 1px solid var(--hairline);
+    border-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .work {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  .work__heading .section-index {
+    gap: 0.8rem;
+  }
+
+  .work__heading h2 {
+    font-size: 2.15rem;
+  }
+
+  .work-card__metric {
+    font-size: 1.8rem;
+  }
+
+  .work-card:nth-child(2) .work-card__metric {
+    right: 0;
+    min-height: 6.5rem;
+  }
+
+  .work-card:nth-child(2) .work-card__action {
+    bottom: 6.5rem;
+    left: 1.5rem;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .research__list button {
+    grid-template-columns: 7rem minmax(0, 1fr);
+    padding: 0.85rem 0;
+  }
+}

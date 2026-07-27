@@ -30,8 +30,14 @@ export function CaseStudyView({ project, onClose }: CaseStudyViewProps) {
       aria-labelledby={`case-${project.id}`}
     >
       <header className="case-view__header">
-        <span>{project.index} / CASE STUDY</span>
-        <button ref={closeButton} type="button" aria-label="关闭案例" onClick={onClose}>
+        <span className="case-view__eyebrow">{project.index} / CASE STUDY</span>
+        <button
+          className="case-view__close"
+          ref={closeButton}
+          type="button"
+          aria-label="关闭案例"
+          onClick={onClose}
+        >
           CLOSE <i aria-hidden="true">×</i>
         </button>
       </header>

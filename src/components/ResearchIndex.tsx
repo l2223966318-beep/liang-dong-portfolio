@@ -1,40 +1,55 @@
 import { reports, type Report } from '../data/portfolio'
+import { MediaWithFallback } from './MediaWithFallback'
 
 type ResearchIndexProps = {
   onOpen: (report: Report, trigger: HTMLButtonElement) => void
 }
 
+function ArrowIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 44 16">
+      <path d="M1 8h40M35 2l6 6-6 6" />
+    </svg>
+  )
+}
+
 export function ResearchIndex({ onOpen }: ResearchIndexProps) {
   return (
     <section className="research" id="research" aria-labelledby="research-title">
-      <header className="section-heading section-heading--ink">
-        <div>
-          <p className="section-kicker">RESEARCH / INDEX</p>
-          <h2 id="research-title">调研与分析</h2>
-        </div>
-        <p>把“我认为”变成“我为什么这样判断”。</p>
+      <header className="research__heading">
+        <h2 id="research-title">
+          RESEARCH
+          <span>/ NOTES</span>
+        </h2>
       </header>
 
-      <div className="research__layout">
-        <div className="research__cover" aria-hidden="true">
-          <div className="research__cover-art" />
-          <span>LD® RESEARCH ARCHIVE</span>
-        </div>
-        <div className="research__list">
-          {reports.map((report) => (
-            <button
-              key={report.id}
-              type="button"
-              aria-label={`查看报告：${report.title}`}
-              onClick={(event) => onOpen(report, event.currentTarget)}
-            >
-              <span>{report.index}</span>
+      <div className="research__list">
+        {reports.map((report) => (
+          <button
+            key={report.id}
+            type="button"
+            aria-label={`查看报告：${report.title}`}
+            onClick={(event) => onOpen(report, event.currentTarget)}
+          >
+            <MediaWithFallback
+              className="research__media"
+              src={report.cover}
+              alt=""
+              fallbackTitle={report.category}
+            />
+            <span className="research__index">
+              {report.index.replace('R.', '')}<i>.</i>
+            </span>
+            <span className="research__copy">
               <strong>{report.title}</strong>
               <small>{report.category}</small>
-              <i aria-hidden="true">↗</i>
-            </button>
-          ))}
-        </div>
+              <span>
+                查看报告
+                <ArrowIcon />
+              </span>
+            </span>
+          </button>
+        ))}
       </div>
     </section>
   )

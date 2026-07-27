@@ -29,8 +29,14 @@ export function ReportDetailView({ report, onClose }: ReportDetailViewProps) {
       aria-labelledby={`report-${report.id}`}
     >
       <header className="case-view__header">
-        <span>{report.index} / RESEARCH NOTE</span>
-        <button ref={closeButton} type="button" aria-label="关闭报告" onClick={onClose}>
+        <span className="case-view__eyebrow">{report.index} / RESEARCH NOTE</span>
+        <button
+          className="case-view__close"
+          ref={closeButton}
+          type="button"
+          aria-label="关闭报告"
+          onClick={onClose}
+        >
           CLOSE <i aria-hidden="true">×</i>
         </button>
       </header>

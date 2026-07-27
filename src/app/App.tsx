@@ -7,7 +7,6 @@ import { ContactFooter } from '../components/ContactFooter'
 import { Hero } from '../components/Hero'
 import { Profile } from '../components/Profile'
 import { ReportDetailView } from '../components/ReportDetailView'
-import { ResearchIndex } from '../components/ResearchIndex'
 import { SelectedWork } from '../components/SelectedWork'
 import type { Project, Report } from '../data/portfolio'
 
@@ -28,13 +27,11 @@ export function App() {
         <Hero />
         <Profile />
         <SelectedWork
-          onOpen={(project, trigger) => {
+          onOpenProject={(project, trigger) => {
             lastTrigger.current = trigger
             setActiveProject(project)
           }}
-        />
-        <ResearchIndex
-          onOpen={(report, trigger) => {
+          onOpenReport={(report, trigger) => {
             lastTrigger.current = trigger
             setActiveReport(report)
           }}

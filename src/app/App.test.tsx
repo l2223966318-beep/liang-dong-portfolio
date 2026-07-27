@@ -66,6 +66,14 @@ describe('App', () => {
   it('offers three reports, direct contact and a resume download', () => {
     render(<App />)
 
+    expect(
+      screen.getByRole('heading', {
+        name: '项目不是陈列，是问题与结果的连接。',
+      }),
+    ).toBeInTheDocument()
+    expect(
+      screen.getAllByRole('button', { name: /查看案例/ }),
+    ).toHaveLength(3)
     expect(screen.getAllByRole('button', { name: /查看报告/ })).toHaveLength(3)
     expect(screen.getByRole('link', { name: '下载简历' })).toHaveAttribute(
       'href',
