@@ -142,7 +142,7 @@ body:has(.report-view) .site-header {
 .hero__media {
   position: absolute;
   z-index: 0;
-  inset: 0 0 0 38%;
+  inset: 0 0 17.5% 26%;
   overflow: hidden;
   background: var(--paper);
 }
@@ -162,7 +162,7 @@ body:has(.report-view) .site-header {
   position: absolute;
   z-index: 4;
   right: 3rem;
-  bottom: 2.45rem;
+  bottom: calc(17.5% + 2.45rem);
   display: flex;
   align-items: center;
   gap: 1.4rem;
@@ -332,11 +332,83 @@ body:has(.report-view) .site-header {
 .hero__place {
   position: absolute;
   z-index: 2;
-  bottom: 1.4rem;
+  bottom: calc(17.5% + 1.4rem);
   left: var(--page-gutter);
   margin: 0;
   font-size: 0.72rem;
   letter-spacing: 0.15em;
+}
+
+.hero__next {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  height: 17.5%;
+  grid-template-columns: 32.5% 67.5%;
+  overflow: hidden;
+  border-top: 1px solid rgb(13 14 17 / 8%);
+  background: var(--paper);
+}
+
+.hero__next-copy {
+  display: grid;
+  min-height: 0;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(1.8rem, 3.5vw, 3.8rem);
+  padding: 1rem var(--page-gutter);
+}
+
+.hero__next-copy strong {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 5.6vw, 5.8rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+}
+
+.hero__next-copy strong span,
+.hero__next-copy small {
+  color: var(--signal);
+}
+
+.hero__next-copy > span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: clamp(1.1rem, 1.45vw, 1.5rem);
+  font-weight: 800;
+}
+
+.hero__next-copy small {
+  font-size: 0.65em;
+  letter-spacing: 0.06em;
+}
+
+.hero__next-copy svg {
+  width: 3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.hero__next-media {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  padding-left: 0.45rem;
+}
+
+.hero__next-media img {
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 760px) {
@@ -467,6 +539,10 @@ body:has(.report-view) .site-header {
   .hero__controls {
     right: var(--page-gutter);
     bottom: 1.4rem;
+  }
+
+  .hero__next {
+    display: none;
   }
 }
 

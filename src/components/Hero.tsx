@@ -29,6 +29,23 @@ export function Hero() {
         </a>
       </div>
       <p className="hero__place">CHENGDU · 2026</p>
+      <a className="hero__next" href="#profile" aria-label="前往关于我章节">
+        <span className="hero__next-copy">
+          <strong>01<span>.</span></strong>
+          <span>
+            <small>PROFILE</small>
+            关于我
+          </span>
+          <svg viewBox="0 0 48 20" aria-hidden="true">
+            <path d="M0 10h43M36 3l7 7-7 7" />
+          </svg>
+        </span>
+        <span className="hero__next-media" aria-hidden="true">
+          <img src={productionMedia.research.beauty} alt="" />
+          <img src={productionMedia.research.worldCup} alt="" />
+          <img src={productionMedia.research.aigc} alt="" />
+        </span>
+      </a>
     </section>
   )
 }

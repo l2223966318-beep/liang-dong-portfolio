@@ -8,10 +8,23 @@
   color: var(--ink);
 }
 
+.contact::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 19.5%;
+  height: 32%;
+  background: var(--citron);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  content: '';
+  pointer-events: none;
+}
+
 .contact__hero {
   position: relative;
   z-index: 2;
-  padding: clamp(2.2rem, 4vh, 3.5rem) var(--page-gutter) 0;
+  padding: 2rem 3rem 0;
   color: var(--paper);
 }
 
@@ -34,12 +47,15 @@
 }
 
 .contact__hero h2 {
-  margin: clamp(2.2rem, 4.2vh, 3.8rem) 0 0;
+  width: 122%;
+  margin: 2rem 0 0;
   font-family: var(--font-display);
-  font-size: clamp(6.5rem, 12.6vw, 13.4rem);
+  font-size: clamp(6.5rem, 14.2vw, 15rem);
   font-weight: 800;
   letter-spacing: -0.08em;
   line-height: 0.82;
+  transform: scaleX(0.82);
+  transform-origin: left top;
 }
 
 .contact__hero h2 span {
@@ -47,14 +63,14 @@
 }
 
 .contact__invitation {
-  margin: 1.5rem 0 0;
+  margin: 0;
   font-size: clamp(0.95rem, 1.45vw, 1.45rem);
   font-weight: 650;
 }
 
 .contact__availability {
   position: absolute;
-  bottom: 0.8rem;
+  bottom: 1.45rem;
   left: var(--page-gutter);
   margin: 0;
   font-family: var(--font-display);
@@ -76,9 +92,9 @@
 .contact__ring {
   position: absolute;
   z-index: 3;
-  top: 29%;
-  right: -4%;
-  width: min(58vw, 62rem);
+  top: 26%;
+  right: 3%;
+  width: min(56vw, 60rem);
   max-width: none;
   pointer-events: none;
 }
@@ -87,18 +103,19 @@
   position: relative;
   z-index: 2;
   display: grid;
-  width: 64%;
-  margin-left: calc(var(--page-gutter) * 1.65);
+  width: 58%;
+  margin-left: calc(var(--page-gutter) * 1.75);
   border: 1px solid var(--signal);
   border-right: 0;
 }
 
 .contact__links a {
-  display: flex;
+  display: grid;
   min-width: 0;
+  grid-template-columns: 3.75rem minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(2rem, 4vw, 4rem);
+  gap: 1.8rem;
+  padding: 0 clamp(2rem, 3vw, 3rem);
   border-bottom: 1px solid var(--signal);
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 3.5vw, 3.7rem);
@@ -116,13 +133,22 @@
   outline-offset: -5px;
 }
 
-.contact__links svg {
+.contact__arrow {
   width: 3.75rem;
   fill: none;
   stroke: var(--signal);
   stroke-linecap: square;
   stroke-linejoin: miter;
   stroke-width: 1.2;
+}
+
+.contact__link-icon {
+  width: 3.5rem;
+  fill: none;
+  stroke: var(--signal);
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.5;
 }
 
 .contact__footer {
@@ -176,7 +202,14 @@
   }
 
   .contact__hero h2 {
+    width: 100%;
     font-size: clamp(6rem, 18vw, 10rem);
+    transform: none;
+  }
+
+  .contact::before {
+    width: 32%;
+    height: 13rem;
   }
 
   .contact__ring {
@@ -232,7 +265,16 @@
     font-size: clamp(1.65rem, 8vw, 2.35rem);
   }
 
-  .contact__links svg {
+  .contact__arrow {
+    width: 2.5rem;
+  }
+
+  .contact__links a {
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+    gap: 0.8rem;
+  }
+
+  .contact__link-icon {
     width: 2.5rem;
   }
 

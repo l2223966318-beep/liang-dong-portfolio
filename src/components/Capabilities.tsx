@@ -3,6 +3,13 @@ import { capabilities, methodSteps } from '../data/profile'
 import { MediaWithFallback } from './MediaWithFallback'
 
 export function Capabilities() {
+  const mediaByTone = {
+    cobalt: productionMedia.projects.worldCup,
+    vermilion: productionMedia.projects.beauty,
+    silver: productionMedia.projects.city,
+    citron: productionMedia.capabilities.aigc,
+  } as const
+
   return (
     <section
       className="capabilities"
@@ -29,16 +36,25 @@ export function Capabilities() {
             <p className="capability__description">{capability.description}</p>
             <div className="capability__evidence">
               <span>证据 / EVIDENCE</span>
-              <strong>{capability.evidence}</strong>
+              <strong>
+                {capability.tone === 'vermilion' ? (
+                  <>
+                    <span className="capability__evidence-context">
+                      {capability.evidence.replace(/\s\+\d+%$/, '')}
+                    </span>
+                    <span className="capability__evidence-metric">
+                      {capability.evidence.match(/\+\d+%$/)?.[0]}
+                    </span>
+                  </>
+                ) : capability.evidence}
+              </strong>
             </div>
-            {capability.tone === 'citron' ? (
-              <MediaWithFallback
-                className="capability__media"
-                src={productionMedia.capabilities.aigc}
-                alt="透明晶体方块从分散到聚合的 AIGC 工作流视觉"
-                fallbackTitle="AIGC WORKFLOW"
-              />
-            ) : null}
+            <MediaWithFallback
+              className="capability__media"
+              src={mediaByTone[capability.tone]}
+              alt={`${capability.title}能力视觉`}
+              fallbackTitle={capability.title}
+            />
           </article>
         ))}
       </div>

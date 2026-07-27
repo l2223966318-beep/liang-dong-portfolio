@@ -71,16 +71,25 @@ test('V3.2 sections, media controls and links remain usable', async ({
   const caseTrigger = page.getByRole('button', {
     name: '查看案例：世界杯热点内容系统',
   })
+  const initialBodyOverflow = await page.evaluate(
+    () => document.body.style.overflow,
+  )
   await caseTrigger.focus()
   await page.keyboard.press('Enter')
   await expect(
     page.getByRole('dialog', { name: '世界杯热点内容系统' }),
   ).toBeVisible()
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe('hidden')
   const caseClose = page.getByRole('button', { name: '关闭案例' })
   await expect(caseClose).toBeFocused()
   await page.keyboard.press('Tab')
   await expect(caseClose).toBeFocused()
   await page.keyboard.press('Escape')
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe(initialBodyOverflow)
   await expect(caseTrigger).toBeFocused()
 
   const reportTrigger = page.getByRole('button', {
@@ -89,11 +98,17 @@ test('V3.2 sections, media controls and links remain usable', async ({
   await reportTrigger.focus()
   await page.keyboard.press('Enter')
   await expect(page.getByRole('dialog')).toBeVisible()
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe('hidden')
   const reportClose = page.getByRole('button', { name: '关闭报告' })
   await expect(reportClose).toBeFocused()
   await page.keyboard.press('Tab')
   await expect(reportClose).toBeFocused()
   await page.keyboard.press('Escape')
+  await expect
+    .poll(() => page.evaluate(() => document.body.style.overflow))
+    .toBe(initialBodyOverflow)
   await expect(reportTrigger).toBeFocused()
 
   await expect(page.getByRole('link', { name: '下载简历' }).last()).toHaveAttribute(
