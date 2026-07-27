@@ -1,6 +1,7 @@
 import { projects, type Project, type Report } from '../data/portfolio'
 import { MediaWithFallback } from './MediaWithFallback'
 import { ResearchIndex } from './ResearchIndex'
+import { SectionTrack } from './SectionTrack'
 
 type SelectedWorkProps = {
   onOpenProject: (project: Project, trigger: HTMLButtonElement) => void
@@ -21,6 +22,7 @@ export function SelectedWork({
 }: SelectedWorkProps) {
   return (
     <section className="work" id="work" aria-labelledby="work-title">
+      <SectionTrack variant="work" />
       <header className="section-heading work__heading">
         <p className="section-index">
           <strong>
@@ -47,7 +49,14 @@ export function SelectedWork({
               <h3>{project.title}</h3>
               <p>{project.role}</p>
             </div>
-            <strong className="work-card__metric">{project.metric}</strong>
+            <div className="work-card__metrics">
+              <strong className="work-card__metric">{project.metric}</strong>
+              {project.id === 'world-cup' ? (
+                <strong className="work-card__supporting-metric">
+                  {project.supportingMetrics[0]}
+                </strong>
+              ) : null}
+            </div>
             <button
               className="work-card__action"
               type="button"

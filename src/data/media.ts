@@ -2,6 +2,11 @@ export const productionMedia = {
   hero: {
     video: '/assets/v32/hero-loop.mp4',
     poster: '/assets/v32/hero-poster.webp',
+    teaser: {
+      yellow: '/assets/v32/hero-teaser-yellow.webp',
+      cyan: '/assets/v32/hero-teaser-cyan.webp',
+      blue: '/assets/v32/hero-teaser-blue.webp',
+    },
   },
   profile: '/assets/v32/profile-bust.webp',
   projects: {

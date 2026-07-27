@@ -41,9 +41,9 @@ export function Hero() {
           </svg>
         </span>
         <span className="hero__next-media" aria-hidden="true">
-          <img src={productionMedia.research.beauty} alt="" />
-          <img src={productionMedia.research.worldCup} alt="" />
-          <img src={productionMedia.research.aigc} alt="" />
+          <img src={productionMedia.hero.teaser.yellow} alt="" />
+          <img src={productionMedia.hero.teaser.cyan} alt="" />
+          <img src={productionMedia.hero.teaser.blue} alt="" />
         </span>
       </a>
     </section>

@@ -1,6 +1,7 @@
 import { productionMedia } from '../data/media'
 import { contact, profileFacts } from '../data/profile'
 import { MediaWithFallback } from './MediaWithFallback'
+import { SectionTrack } from './SectionTrack'
 
 function ContactIcon({ type }: { type: 'email' | 'phone' | 'resume' }) {
   if (type === 'email') {
@@ -30,6 +31,7 @@ function ContactIcon({ type }: { type: 'email' | 'phone' | 'resume' }) {
 export function Profile() {
   return (
     <section className="profile" id="profile" aria-labelledby="profile-title">
+      <SectionTrack variant="profile" />
       <div className="profile__content">
         <header className="chapter-heading chapter-heading--profile">
           <strong>01<span>.</span></strong>

@@ -28,6 +28,10 @@
   color: var(--paper);
 }
 
+.section-track--contact {
+  z-index: 2;
+}
+
 .chapter-heading--contact {
   gap: 2.5rem;
 }
@@ -195,6 +199,10 @@
 }
 
 @media (max-width: 760px) {
+  .section-track--contact {
+    display: none;
+  }
+
   .contact {
     min-height: 70rem;
     grid-template-rows: 42rem 23rem 5rem;
@@ -219,6 +227,7 @@
   }
 
   .contact__links {
+    z-index: 4;
     width: calc(100% - (var(--page-gutter) * 2));
     margin: 0 var(--page-gutter);
   }

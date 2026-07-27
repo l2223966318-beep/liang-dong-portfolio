@@ -1,5 +1,6 @@
 import { productionMedia } from '../data/media'
 import { contact } from '../data/profile'
+import { SectionTrack } from './SectionTrack'
 
 const footerNavigation = [
   ['回到顶部', '#top'],
@@ -20,6 +21,7 @@ function ArrowIcon() {
 export function ContactFooter() {
   return (
     <footer className="contact" id="contact" aria-labelledby="contact-title">
+      <SectionTrack variant="contact" />
       <header className="contact__hero">
         <div className="chapter-heading chapter-heading--contact">
           <strong>04<span>.</span></strong>
