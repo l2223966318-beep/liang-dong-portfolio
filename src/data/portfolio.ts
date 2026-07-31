@@ -1,4 +1,5 @@
 import { productionMedia } from './media'
+import { publicPath } from './paths'
 
 export type Project = {
   id: 'world-cup' | 'brand-marketing' | 'city-media'
@@ -75,7 +76,7 @@ export const projects: Project[] = [
     reflectionDocument: {
       title: '世界杯专项内容运营项目 · 数据与内容总结',
       description: '2,475 条有效记录 · 2,358 篇去重稿件 · DOCX',
-      href: '/assets/documents/world-cup-content-summary.docx',
+      href: publicPath('/assets/documents/world-cup-content-summary.docx'),
     },
     cover: productionMedia.hero.floatingPosters.worldCup,
     coverAlt: '2026 世界杯足球赛事海报',
@@ -85,12 +86,12 @@ export const projects: Project[] = [
       {
         title: '世界杯热点日报 · 07.20',
         description: '决赛日热点直击 · DOCX',
-        href: '/assets/documents/world-cup-daily-0720.docx',
+        href: publicPath('/assets/documents/world-cup-daily-0720.docx'),
       },
       {
         title: '世界杯热点日报 · 06.10',
         description: '开赛前平台监测 · DOCX',
-        href: '/assets/documents/world-cup-daily-0610.docx',
+        href: publicPath('/assets/documents/world-cup-daily-0610.docx'),
       },
     ],
   },
@@ -121,7 +122,7 @@ export const projects: Project[] = [
     reflectionDocument: {
       title: '4 月湿巾舆情营销复盘文档',
       description: '20 位达人 · 80.2 万曝光 · 13,700 互动 · DOCX',
-      href: '/assets/documents/wet-wipes-sentiment-review-april.docx',
+      href: publicPath('/assets/documents/wet-wipes-sentiment-review-april.docx'),
     },
     media: productionMedia.projects.beauty,
     mediaAlt: '银灰与橙红色美妆增长抽象视觉',
@@ -153,31 +154,31 @@ export const projects: Project[] = [
       {
         title: '成都在等你',
         description: '城市文旅形象短片 · 视频号',
-        cover: '/assets/video-covers/city-video-01.png',
+        cover: publicPath('/assets/video-covers/city-video-01.png'),
         href: 'https://weixin.qq.com/sph/Aksjjj047x',
       },
       {
         title: '夜游城市叙事',
         description: '夜间文旅氛围短片 · 视频号',
-        cover: '/assets/video-covers/city-video-02.png',
+        cover: publicPath('/assets/video-covers/city-video-02.png'),
         href: 'https://weixin.qq.com/sph/Anw8ed4CII',
       },
       {
         title: '文旅互动现场',
         description: '活动现场内容记录 · 视频号',
-        cover: '/assets/video-covers/city-video-03.png',
+        cover: publicPath('/assets/video-covers/city-video-03.png'),
         href: 'https://weixin.qq.com/sph/AY7V7J1mGY',
       },
       {
         title: 'Wedding Dress Show',
         description: '品牌活动影像 · 视频号',
-        cover: '/assets/video-covers/city-video-04.png',
+        cover: publicPath('/assets/video-covers/city-video-04.png'),
         href: 'https://weixin.qq.com/sph/Ag1I0qR6qp',
       },
       {
         title: '川菜人物短片',
         description: '城市美食内容 · 视频号',
-        cover: '/assets/video-covers/city-video-05.png',
+        cover: publicPath('/assets/video-covers/city-video-05.png'),
         href: 'https://weixin.qq.com/sph/AnK4NwAoh1',
       },
     ],

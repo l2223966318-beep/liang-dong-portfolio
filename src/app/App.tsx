@@ -15,6 +15,7 @@ import {
   getAigcShowcaseUrl,
   type AigcProject,
 } from '../data/aigc'
+import { publicPath } from '../data/paths'
 import type { Project, Report } from '../data/portfolio'
 
 export function App() {
@@ -50,7 +51,7 @@ export function App() {
       return
     }
 
-    window.history.replaceState({}, '', '/')
+    window.history.replaceState({}, '', publicPath(''))
     setActiveAigcProject(null)
   }, [activeAigcProject])
 

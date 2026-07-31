@@ -1,3 +1,5 @@
+import { publicPath } from './paths'
+
 export type AigcMedia = {
   kind: 'image' | 'video'
   src: string
@@ -31,7 +33,7 @@ export type AigcProject = {
 
 const image = (src: string, alt: string, caption: string): AigcMedia => ({
   kind: 'image',
-  src,
+  src: publicPath(src),
   alt,
   caption,
 })
@@ -43,7 +45,7 @@ const video = (
   label: string,
 ): AigcMedia => ({
   kind: 'video',
-  src,
+  src: publicPath(src),
   alt,
   caption,
   label,
@@ -344,5 +346,5 @@ export function getAigcProject(id: string | null) {
 }
 
 export function getAigcShowcaseUrl(id: AigcProject['id']) {
-  return `/?showcase=${id}`
+  return publicPath(`?showcase=${id}`)
 }

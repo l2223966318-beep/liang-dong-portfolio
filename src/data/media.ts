@@ -1,28 +1,30 @@
+import { publicPath } from './paths'
+
 export const productionMedia = {
   hero: {
-    video: '/assets/v32/hero-loop.mp4',
-    poster: '/assets/v32/hero-poster.webp',
+    video: publicPath('/assets/v32/hero-loop.mp4'),
+    poster: publicPath('/assets/v32/hero-poster.webp'),
     floatingPosters: {
-      worldCup: '/assets/aigc/poster-worldcup.webp',
-      opera: '/assets/aigc/design-opera.webp',
-      jewelry: '/assets/aigc/design-jewelry.webp',
-      food: '/assets/aigc/design-food.webp',
-      space: '/assets/aigc/design-space.webp',
+      worldCup: publicPath('/assets/aigc/poster-worldcup.webp'),
+      opera: publicPath('/assets/aigc/design-opera.webp'),
+      jewelry: publicPath('/assets/aigc/design-jewelry.webp'),
+      food: publicPath('/assets/aigc/design-food.webp'),
+      space: publicPath('/assets/aigc/design-space.webp'),
     },
   },
-  profile: '/assets/v32/profile-bust.webp',
+  profile: publicPath('/assets/v32/profile-bust.webp'),
   projects: {
-    worldCup: '/assets/v32/project-world-cup.webp',
-    beauty: '/assets/v32/project-beauty.webp',
-    city: '/assets/v32/project-city.webp',
+    worldCup: publicPath('/assets/v32/project-world-cup.webp'),
+    beauty: publicPath('/assets/v32/project-beauty.webp'),
+    city: publicPath('/assets/v32/project-city.webp'),
   },
   research: {
-    beauty: '/assets/v32/research-beauty.webp',
-    worldCup: '/assets/v32/research-world-cup.webp',
-    aigc: '/assets/v32/research-aigc.webp',
+    beauty: publicPath('/assets/v32/research-beauty.webp'),
+    worldCup: publicPath('/assets/v32/research-world-cup.webp'),
+    aigc: publicPath('/assets/v32/research-aigc.webp'),
   },
   capabilities: {
-    aigc: '/assets/v32/capability-aigc.webp',
+    aigc: publicPath('/assets/v32/capability-aigc.webp'),
   },
-  contact: '/assets/v32/contact-ring.webp',
+  contact: publicPath('/assets/v32/contact-ring.webp'),
 } as const

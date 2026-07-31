@@ -1,3 +1,5 @@
+import { publicPath } from './paths'
+
 export type EvidenceItem = {
   index: string
   title: string
@@ -50,6 +52,6 @@ export const contact = {
   email: '2223966318@qq.com',
   phone: '18990188659',
   phoneLabel: '189 9018 8659',
-  resume: '/resume/梁栋简历-一周内到岗-可实习3-6月.pdf',
+  resume: publicPath('/resume/梁栋简历-一周内到岗-可实习3-6月.pdf'),
   resumeFileName: '梁栋简历-一周内到岗-可实习3-6月.pdf',
 } as const

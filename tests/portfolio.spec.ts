@@ -65,7 +65,7 @@ test('recruiter can inspect a project and reach the resume', async ({ page }) =>
 
   await expect(page.getByRole('link', { name: '下载简历' })).toHaveAttribute(
     'href',
-    '/resume/liang-dong-resume.pdf',
+    '/resume/梁栋简历-一周内到岗-可实习3-6月.pdf',
   )
 })
 
@@ -210,7 +210,7 @@ test('V3.2 sections, media controls and links remain usable', async ({
 
   await expect(page.getByRole('link', { name: '下载简历' }).last()).toHaveAttribute(
     'href',
-    '/resume/liang-dong-resume.pdf',
+    '/resume/梁栋简历-一周内到岗-可实习3-6月.pdf',
   )
   await expect(page.locator('.motion-root')).toHaveClass(/\bhas-motion\b/)
 })
