@@ -9,14 +9,13 @@ describe('SelectedWork', () => {
     render(
       <SelectedWork
         onOpenProject={vi.fn()}
-        onOpenReport={vi.fn()}
       />,
     )
 
-    const supportingMetric = screen.getByText('53 位 UP 主协同')
+    const supportingMetric = screen.getByText('26 份热点日报')
     const card = supportingMetric.closest('.work-card')
 
-    expect(card).toHaveTextContent('26 份热点日报')
+    expect(card).toHaveTextContent('足球区流量环比 +38%')
     expect(supportingMetric).toHaveClass('work-card__supporting-metric')
   })
 
@@ -25,7 +24,6 @@ describe('SelectedWork', () => {
     render(
       <SelectedWork
         onOpenProject={vi.fn()}
-        onOpenReport={vi.fn()}
       />,
     )
 

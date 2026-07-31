@@ -9,9 +9,9 @@ const flatten = (value: unknown): string[] =>
     : Object.values(value as Record<string, unknown>).flatMap(flatten)
 
 describe('productionMedia', () => {
-  it('keeps every project-bound media file inside public/assets/v32', () => {
+  it('keeps every project-bound media file inside public/assets', () => {
     for (const path of flatten(productionMedia)) {
-      expect(path).toMatch(/^\/assets\/v32\//)
+      expect(path).toMatch(/^\/assets\/(?:v32|aigc)\//)
       expect(existsSync(resolve('public', path.slice(1)))).toBe(true)
     }
   })

@@ -2,10 +2,12 @@ export const productionMedia = {
   hero: {
     video: '/assets/v32/hero-loop.mp4',
     poster: '/assets/v32/hero-poster.webp',
-    teaser: {
-      yellow: '/assets/v32/hero-teaser-yellow.webp',
-      cyan: '/assets/v32/hero-teaser-cyan.webp',
-      blue: '/assets/v32/hero-teaser-blue.webp',
+    floatingPosters: {
+      worldCup: '/assets/aigc/poster-worldcup.webp',
+      opera: '/assets/aigc/design-opera.webp',
+      jewelry: '/assets/aigc/design-jewelry.webp',
+      food: '/assets/aigc/design-food.webp',
+      space: '/assets/aigc/design-space.webp',
     },
   },
   profile: '/assets/v32/profile-bust.webp',

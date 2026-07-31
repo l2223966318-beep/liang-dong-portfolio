@@ -4,6 +4,7 @@
 @import './profile-capabilities.css';
 @import './contact.css';
 @import './work-research.css';
+@import './aigc.css';
 @import './overlays.css';
 
 .app {

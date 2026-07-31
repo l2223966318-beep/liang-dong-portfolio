@@ -64,7 +64,7 @@ export function CaseStudyView({ project, onClose }: CaseStudyViewProps) {
         tone={
           project.id === 'world-cup'
             ? 'cobalt'
-            : project.id === 'overseas-growth'
+            : project.id === 'brand-marketing'
               ? 'vermilion'
               : 'teal'
         }
@@ -99,8 +99,79 @@ export function CaseStudyView({ project, onClose }: CaseStudyViewProps) {
         <section>
           <span>04 / REFLECTION</span>
           <h3>复盘</h3>
-          <p>{project.reflection}</p>
+          <div className="case-view__reflection">
+            <p>{project.reflection}</p>
+            {project.reflectionDocument ? (
+              <a
+                className="case-view__summary-link"
+                href={project.reflectionDocument.href}
+                download
+                aria-label={`下载总结：${project.reflectionDocument.title}`}
+              >
+                <span>
+                  <strong>{project.reflectionDocument.title}</strong>
+                  <small>{project.reflectionDocument.description}</small>
+                </span>
+                <svg viewBox="0 0 28 32" aria-hidden="true">
+                  <path d="M14 1v20M8 15l6 6 6-6M3 25v5h22v-5" />
+                </svg>
+              </a>
+            ) : null}
+          </div>
         </section>
+        {project.documents?.length ? (
+          <section>
+            <span>05 / DAILY REPORTS</span>
+            <h3>热点日报样本</h3>
+            <div className="case-view__documents" aria-label="热点日报下载">
+              {project.documents.map((document) => (
+                <a
+                  key={document.href}
+                  href={document.href}
+                  download
+                  aria-label={`下载热点日报：${document.title}`}
+                >
+                  <span>
+                    <strong>{document.title}</strong>
+                    <small>{document.description}</small>
+                  </span>
+                  <svg viewBox="0 0 28 32" aria-hidden="true">
+                    <path d="M14 1v20M8 15l6 6 6-6M3 25v5h22v-5" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
+        {project.videos?.length ? (
+          <section>
+            <span>05 / VIDEO WORKS</span>
+            <h3>影像作品</h3>
+            <div className="case-view__videos" aria-label="视频号影像作品">
+              {project.videos.map((video) => (
+                <a
+                  className="case-view__video-card"
+                  href={video.href}
+                  key={video.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`在微信视频号打开：${video.title}`}
+                >
+                  <img src={video.cover} alt="" loading="lazy" />
+                  <span className="case-view__video-play" aria-hidden="true">
+                    <svg viewBox="0 0 32 32">
+                      <path d="m12 8 12 8-12 8V8Z" />
+                    </svg>
+                  </span>
+                  <div className="case-view__video-copy">
+                    <strong>{video.title}</strong>
+                    <small>{video.description}</small>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
     </div>
   )

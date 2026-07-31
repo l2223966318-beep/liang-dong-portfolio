@@ -5,7 +5,7 @@ import { SectionTrack } from './SectionTrack'
 const footerNavigation = [
   ['回到顶部', '#top'],
   ['项目', '#work'],
-  ['AIGC', '#capabilities'],
+  ['AIGC', '#aigc'],
   ['研究', '#research'],
   ['关于', '#profile'],
 ] as const
@@ -37,17 +37,15 @@ export function ContactFooter() {
       <SectionTrack variant="contact" />
       <header className="contact__hero">
         <div className="chapter-heading chapter-heading--contact">
-          <strong>04<span>.</span></strong>
+          <strong>05<span>.</span></strong>
           <p>/ CONTACT</p>
         </div>
         <h2 id="contact-title">
           <span>LET&apos;S MAKE</span>
           <span>IT MATTER.</span>
         </h2>
-        <p className="contact__invitation">
-          如果你需要一个既能判断方向，也能推动落地的人，我们可以聊聊。
-        </p>
-        <p className="contact__availability">AVAILABLE NOW / 可尽快到岗</p>
+        <p className="contact__invitation">期待与您进一步交流沟通。</p>
+        <p className="contact__availability">AVAILABLE IN ONE WEEK / 一周内到岗</p>
       </header>
 
       <img
@@ -75,7 +73,7 @@ export function ContactFooter() {
           <span>{contact.phoneLabel}</span>
           <ArrowIcon />
         </a>
-        <a href={contact.resume} download>
+        <a href={contact.resume} download={contact.resumeFileName}>
           <svg className="contact__link-icon" viewBox="0 0 48 48" aria-hidden="true">
             <circle cx="24" cy="24" r="22" />
             <path d="M17 11h11l7 7v19H17Z" />

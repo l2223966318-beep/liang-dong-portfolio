@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { AppShell } from '../components/AppShell'
+import { AigcLab } from '../components/AigcLab'
+import { AigcShowcasePage } from '../components/AigcShowcasePage'
 import { Capabilities } from '../components/Capabilities'
 import { CaseStudyView } from '../components/CaseStudyView'
 import { ContactFooter } from '../components/ContactFooter'
@@ -8,14 +10,49 @@ import { Hero } from '../components/Hero'
 import { Profile } from '../components/Profile'
 import { ReportDetailView } from '../components/ReportDetailView'
 import { SelectedWork } from '../components/SelectedWork'
+import {
+  getAigcProject,
+  getAigcShowcaseUrl,
+  type AigcProject,
+} from '../data/aigc'
 import type { Project, Report } from '../data/portfolio'
 
 export function App() {
+  const [activeAigcProject, setActiveAigcProject] =
+    useState<AigcProject | null>(() => {
+      const params = new URLSearchParams(window.location.search)
+      return getAigcProject(params.get('showcase'))
+    })
   const [activeProject, setActiveProject] = useState<Project | null>(null)
   const [activeReport, setActiveReport] = useState<Report | null>(null)
   const lastTrigger = useRef<HTMLButtonElement | null>(null)
   const overlayHistoryMarker = useRef<string | null>(null)
   const overlaySequence = useRef(0)
+
+  const openAigcShowcase = useCallback((projectId: string) => {
+    const project = getAigcProject(projectId)
+    if (!project) return
+
+    window.history.pushState(
+      { portfolioShowcase: project.id },
+      '',
+      getAigcShowcaseUrl(project.id),
+    )
+    setActiveAigcProject(project)
+  }, [])
+
+  const closeAigcShowcase = useCallback(() => {
+    if (
+      activeAigcProject &&
+      window.history.state?.portfolioShowcase === activeAigcProject.id
+    ) {
+      window.history.back()
+      return
+    }
+
+    window.history.replaceState({}, '', '/')
+    setActiveAigcProject(null)
+  }, [activeAigcProject])
 
   const closeOverlayState = useCallback(() => {
     setActiveProject(null)
@@ -80,6 +117,26 @@ export function App() {
       window.removeEventListener('popstate', closeOnHistoryNavigation)
   }, [closeOverlayState])
 
+  useEffect(() => {
+    const syncShowcaseWithLocation = () => {
+      const params = new URLSearchParams(window.location.search)
+      setActiveAigcProject(getAigcProject(params.get('showcase')))
+    }
+
+    window.addEventListener('popstate', syncShowcaseWithLocation)
+    return () =>
+      window.removeEventListener('popstate', syncShowcaseWithLocation)
+  }, [])
+
+  if (activeAigcProject) {
+    return (
+      <AigcShowcasePage
+        project={activeAigcProject}
+        onBack={closeAigcShowcase}
+      />
+    )
+  }
+
   return (
     <AppShell>
       <main className="app">
@@ -89,10 +146,8 @@ export function App() {
           onOpenProject={(project, trigger) =>
             openOverlay('project', project, trigger)
           }
-          onOpenReport={(report, trigger) =>
-            openOverlay('report', report, trigger)
-          }
         />
+        <AigcLab onOpen={openAigcShowcase} />
         <Capabilities />
         <ContactFooter />
       </main>

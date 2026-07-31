@@ -11,9 +11,8 @@ import { MotionProvider } from './MotionProvider'
 
 const navItems = [
   ['项目', '#work'],
-  ['AIGC', '#capabilities'],
+  ['AIGC', '#aigc'],
   ['研究', '#research'],
-  ['关于', '#profile'],
 ] as const
 
 const mobileNavigationQuery = '(max-width: 760px)'

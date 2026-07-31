@@ -16,7 +16,11 @@ describe('ContactFooter', () => {
     )
     expect(screen.getByRole('link', { name: '下载简历' })).toHaveAttribute(
       'href',
-      '/resume/liang-dong-resume.pdf',
+      '/resume/梁栋简历-一周内到岗-可实习3-6月.pdf',
+    )
+    expect(screen.getByRole('link', { name: '下载简历' })).toHaveAttribute(
+      'download',
+      '梁栋简历-一周内到岗-可实习3-6月.pdf',
     )
   })
 

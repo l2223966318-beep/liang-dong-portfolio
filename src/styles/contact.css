@@ -54,7 +54,7 @@
   width: 122%;
   margin: 2rem 0 0;
   font-family: var(--font-display);
-  font-size: clamp(6.5rem, 14.2vw, 15rem);
+  font-size: clamp(5.5rem, 11vw, 12rem);
   font-weight: 800;
   letter-spacing: -0.08em;
   line-height: 0.82;
@@ -67,6 +67,9 @@
 }
 
 .contact__invitation {
+  position: absolute;
+  bottom: 4rem;
+  left: var(--page-gutter);
   margin: 0;
   font-size: clamp(0.95rem, 1.45vw, 1.45rem);
   font-weight: 650;
@@ -245,6 +248,10 @@
     width: 100%;
     font-size: clamp(6rem, 18vw, 10rem);
     transform: none;
+  }
+
+  .contact__invitation {
+    position: static;
   }
 
   .contact::before {

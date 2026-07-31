@@ -1,13 +1,11 @@
 import { useState, type KeyboardEvent } from 'react'
 
-import { projects, type Project, type Report } from '../data/portfolio'
+import { projects, type Project } from '../data/portfolio'
 import { MediaWithFallback } from './MediaWithFallback'
-import { ResearchIndex } from './ResearchIndex'
 import { SectionTrack } from './SectionTrack'
 
 type SelectedWorkProps = {
   onOpenProject: (project: Project, trigger: HTMLButtonElement) => void
-  onOpenReport: (report: Report, trigger: HTMLButtonElement) => void
 }
 
 function ArrowIcon() {
@@ -34,7 +32,6 @@ function StepIcon({ direction }: { direction: 'previous' | 'next' }) {
 
 export function SelectedWork({
   onOpenProject,
-  onOpenReport,
 }: SelectedWorkProps) {
   const [activeIndex, setActiveIndex] = useState(1)
 
@@ -92,22 +89,26 @@ export function SelectedWork({
       >
         {projects.map((project, index) => (
           <article
-            className={
-              index === activeIndex ? 'work-card is-active' : 'work-card'
-            }
+            className={[
+              'work-card',
+              index === activeIndex ? 'is-active' : '',
+              project.id === 'world-cup' ? 'work-card--world-cup' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
             aria-current={index === activeIndex ? 'true' : undefined}
             key={project.id}
           >
             <MediaWithFallback
               className="work-card__media"
-              src={project.media}
-              alt={project.mediaAlt}
+              src={project.cover ?? project.media}
+              alt={project.coverAlt ?? project.mediaAlt}
               fallbackTitle={project.titleEn}
               fallbackMark={`PROJECT / ${project.index}`}
               tone={
                 project.id === 'world-cup'
                   ? 'cobalt'
-                  : project.id === 'overseas-growth'
+                  : project.id === 'brand-marketing'
                     ? 'vermilion'
                     : 'teal'
               }
@@ -142,8 +143,6 @@ export function SelectedWork({
           </article>
         ))}
       </div>
-
-      <ResearchIndex onOpen={onOpenReport} />
     </section>
   )
 }

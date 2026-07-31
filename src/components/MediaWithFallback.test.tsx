@@ -65,11 +65,11 @@ describe('MediaWithFallback', () => {
     profile.unmount()
 
     const work = render(
-      <SelectedWork onOpenProject={vi.fn()} onOpenReport={vi.fn()} />,
+      <SelectedWork onOpenProject={vi.fn()} />,
     )
-    fireEvent.error(screen.getByAltText('红银色全球信号抽象视觉'))
+    fireEvent.error(screen.getByAltText('2026 世界杯足球赛事海报'))
     expect(
-      screen.getByRole('img', { name: '红银色全球信号抽象视觉' }),
+      screen.getByRole('img', { name: '2026 世界杯足球赛事海报' }),
     ).toHaveClass('media-fallback')
     work.unmount()
 

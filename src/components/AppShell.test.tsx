@@ -33,16 +33,15 @@ describe('AppShell', () => {
     )
     expect(screen.getByRole('link', { name: 'AIGC' })).toHaveAttribute(
       'href',
-      '#capabilities',
+      '#aigc',
     )
     expect(screen.getByRole('link', { name: '研究' })).toHaveAttribute(
       'href',
       '#research',
     )
-    expect(screen.getByRole('link', { name: '关于' })).toHaveAttribute(
-      'href',
-      '#profile',
-    )
+    expect(
+      screen.queryByRole('link', { name: '关于' }),
+    ).not.toBeInTheDocument()
     expect(screen.getByRole('link', { name: '联系我' })).toHaveAttribute(
       'href',
       '#contact',
@@ -116,7 +115,7 @@ describe('AppShell', () => {
     expect(screen.getByText('正文按钮')).not.toHaveFocus()
 
     await user.keyboard('{Escape}')
-    expect(menuButton).toHaveFocus()
+    await waitFor(() => expect(menuButton).toHaveFocus())
     expect(screen.getByTestId('page-content').parentElement).not.toHaveAttribute(
       'inert',
     )

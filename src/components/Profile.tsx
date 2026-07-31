@@ -1,7 +1,6 @@
 import { productionMedia } from '../data/media'
-import { contact, profileFacts } from '../data/profile'
+import { contact } from '../data/profile'
 import { MediaWithFallback } from './MediaWithFallback'
-import { SectionTrack } from './SectionTrack'
 
 function ContactIcon({ type }: { type: 'email' | 'phone' | 'resume' }) {
   if (type === 'email') {
@@ -31,12 +30,31 @@ function ContactIcon({ type }: { type: 'email' | 'phone' | 'resume' }) {
 export function Profile() {
   return (
     <section className="profile" id="profile" aria-labelledby="profile-title">
-      <SectionTrack variant="profile" />
       <div className="profile__content">
         <header className="chapter-heading chapter-heading--profile">
           <strong>01<span>.</span></strong>
           <p>/ PROFILE</p>
         </header>
+
+        <div
+          className="profile__education"
+          aria-label="学历：西南财经大学新闻与传播硕士，GPA 3.6/4，2027届，广告学学士"
+        >
+          <strong className="profile__education-label">EDUCATION</strong>
+          <div className="profile__education-body">
+            <p className="profile__education-degree">
+              <strong>西南财经大学</strong>
+              <span>新闻与传播硕士</span>
+            </p>
+            <p className="profile__education-meta">
+              <span>GPA 3.6/4</span>
+              <i aria-hidden="true" />
+              <span>2027届</span>
+              <i aria-hidden="true" />
+              <span>广告学学士</span>
+            </p>
+          </div>
+        </div>
 
         <h2 id="profile-title" aria-label="三年内容经验，从判断到落地。">
           <span>三年内容经验，</span>
@@ -45,12 +63,9 @@ export function Profile() {
         <p className="profile__statement">
           THINK <span>/</span> MAKE <span>/</span> GROW
         </p>
-        <p className="profile__intro">
-          我关注内容为什么有效：如何发现信号、组织叙事、适配平台，并把创意转化成可衡量的增长。
-        </p>
         <p className="profile__scope">
-          内容策略 <i>·</i> 新媒体运营 <i>·</i> 影像制作 <i>·</i> 品牌研究{' '}
-          <i>·</i> AIGC 工作流
+          B站专项 <i>·</i> 品牌营销 <i>·</i> 海外增长 <i>·</i> 影像制作{' '}
+          <i>·</i> AIGC
         </p>
 
         <div className="profile__contact" aria-label="联系梁栋">
@@ -68,7 +83,11 @@ export function Profile() {
               {contact.phoneLabel}
             </span>
           </a>
-          <a href={contact.resume} download aria-label="下载 PDF 简历">
+          <a
+            href={contact.resume}
+            download={contact.resumeFileName}
+            aria-label="下载 PDF 简历"
+          >
             <ContactIcon type="resume" />
             <span>下载简历</span>
           </a>
@@ -79,7 +98,7 @@ export function Profile() {
         <MediaWithFallback
           src={productionMedia.profile}
           alt="由透明晶体切面构成的抽象身份雕塑"
-          fallbackTitle="ABSTRACT IDENTITY"
+          fallbackTitle="LIANG DONG"
           fallbackMark="PROFILE / 01"
           tone="cobalt"
           variant="identity"
@@ -87,18 +106,6 @@ export function Profile() {
         <p aria-hidden="true">
           <span>CHENGDU</span> · <span>2026</span>
         </p>
-      </div>
-
-      <div className="profile__facts" aria-label="经历证据">
-        {profileFacts.map((fact) => (
-          <div key={fact.label}>
-            <strong>{fact.value}</strong>
-            <span>{fact.label}</span>
-            <svg viewBox="0 0 48 12" aria-hidden="true">
-              <path d="M0 6h44M38 1l6 5-6 5" />
-            </svg>
-          </div>
-        ))}
       </div>
     </section>
   )

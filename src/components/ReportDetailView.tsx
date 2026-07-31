@@ -45,10 +45,18 @@ export function ReportDetailView({ report, onClose }: ReportDetailViewProps) {
         </button>
       </header>
       <div className="report-view__content">
-        <p>{report.category}</p>
+        <p>
+          <span>{report.category}</span>
+          <strong>{report.source}</strong>
+        </p>
         <h2 id={`report-${report.id}`}>{report.title}</h2>
         <div className="report-view__rule" />
         <p>{report.summary}</p>
+        <ul aria-label="关键证据">
+          {report.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
         <aside>
           本页展示的是基于个人项目经验整理的研究摘要，不伪装为完整客户交付件。
         </aside>

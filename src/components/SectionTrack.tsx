@@ -74,18 +74,8 @@ export function SectionTrack({ variant }: SectionTrackProps) {
           className="section-track__rail"
           d="M0 62.5H6V92Q6 94 8 94H83L99 74V0"
         />
-        <path
-          className="section-track__rail"
-          d="M6 69H63L70 78M6 76.5H67L74 85M6 84H71"
-        />
-        <path className="section-track__arrow" d="m59 67.8 1.6 1.2-1.6 1.2" />
-        <path className="section-track__arrow" d="m59 75.3 1.6 1.2-1.6 1.2" />
-        <path className="section-track__arrow" d="m59 82.8 1.6 1.2-1.6 1.2" />
       </svg>
       <TrackNode cx={6} cy={62.5} />
-      <TrackNode cx={6} cy={69} />
-      <TrackNode cx={6} cy={76.5} />
-      <TrackNode cx={6} cy={84} />
     </div>
   )
 }

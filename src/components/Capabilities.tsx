@@ -18,7 +18,7 @@ export function Capabilities() {
     >
       <header className="capabilities__header">
         <div className="chapter-heading chapter-heading--capabilities">
-          <strong>03<span>.</span></strong>
+          <strong>04<span>.</span></strong>
           <p>/ CAPABILITIES</p>
         </div>
         <h2 id="capabilities-title">既能判断方向，也能把它做出来。</h2>
