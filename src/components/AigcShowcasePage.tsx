@@ -139,6 +139,30 @@ export function AigcShowcasePage({
         </div>
       </section>
 
+      {project.deliverables && project.deliverables.length > 0 ? (
+        <section
+          className="aigc-showcase__deliverables"
+          aria-labelledby="aigc-deliverables-title"
+        >
+          <header>
+            <p>SELECTED WORKS</p>
+            <h2 id="aigc-deliverables-title">这次具体做了什么。</h2>
+          </header>
+          <div className="aigc-showcase__deliverable-grid">
+            {project.deliverables.map((item, index) => (
+              <article className="aigc-showcase__deliverable" key={item.title}>
+                <div>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <span>{item.format}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {project.gallery.length > 0 ? (
         <section className="aigc-showcase__gallery" aria-label="项目画面">
           <header>
