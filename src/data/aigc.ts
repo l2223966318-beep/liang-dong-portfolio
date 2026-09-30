@@ -351,51 +351,57 @@ export const aigcProjects: AigcProject[] = [
     id: 'xgimi-aigc-shorts',
     index: 'AI.07',
     title: 'AIGC 商业短视频实验',
-    subtitle: '极米品牌创意内容与 AI 影像实践',
-    category: 'AI VIDEO / BRAND CREATIVE',
+    subtitle: '极米品牌内容场景下的 AI 创意生产实践',
+    category: 'AI VIDEO / BRAND CONTENT',
     summary:
-      '围绕品牌内容传播，尝试把 AI 角色、反差叙事、动物科普与音乐改编做成短视频成片，验证生成式内容在社媒创意中的可用性。',
+      '围绕品牌社媒内容生产，尝试把 AIGC 从“生成画面”推进到“完成可发布成片”：从选题、脚本、角色与镜头设计，到配音、音乐、剪辑与产品信息整合，验证不同内容类型在品牌传播中的适配方式。',
     problem:
-      'AI 视频真正进入品牌内容时，难点不只是生成画面，而是让创意钩子、角色连续性、产品信息、节奏和平台观看体验同时成立。',
+      '品牌使用 AIGC 的核心问题并不是“能不能生成”，而是生成内容能否同时满足三个要求：用户愿意看、产品信息能自然进入、最终成片具备稳定的视觉与叙事质量。单纯追求技术效果，往往会让内容失去传播价值。',
     workflow: [
-      '从社媒传播场景确定创意钩子与脚本方向',
-      '拆解角色、场景、镜头与产品信息露出',
-      '用 AI 完成人物与画面生成，并反复修正连续性',
-      '完成剪辑、字幕、配音或音乐适配并输出短视频成片',
+      '从产品卖点与平台内容语境出发，确定选题和传播钩子',
+      '把创意拆解为脚本、角色、场景、镜头和信息露出节点',
+      '使用 AI 完成视觉与声音素材生产，并针对角色一致性、动作和画面逻辑反复修正',
+      '通过人工剪辑、字幕、节奏和信息取舍，将素材收束为可传播的短视频成片',
     ],
     collaboration:
-      'AI 负责角色与画面生成、创意变体和部分音频制作；人负责选题判断、脚本结构、品牌信息取舍、镜头筛选、剪辑节奏与最终成片验收。',
+      'AI 更适合承担高频试错和素材生成，人负责决定“什么值得做、什么应该删、产品应该在哪里出现”。项目中我的主要工作不是单次生成，而是持续控制选题方向、叙事节奏、角色一致性与品牌信息密度。',
     tools: ['AI 视频生成', 'AI 图像生成', 'ChatGPT', '剪辑工具', 'AI 音频'],
     outcomes: [
-      '完成 4 支竖版 AIGC 短视频成片',
-      '覆盖反差剧情、动物科普、角色视觉与音乐短片等内容形态',
-      '额外完成 1 条品牌主题音频 Demo，形成从声音到画面的完整创意尝试',
+      '完成 4 支不同内容模型的竖版 AIGC 短视频成片',
+      '覆盖反差剧情、知识科普、角色视觉和音乐内容，形成可比较的内容样本',
+      '完成 1 条品牌主题音频 Demo，打通从声音创意到视频成片的生产链路',
+      '沉淀出一套适用于品牌短视频的 AIGC 工作方式：AI 扩大素材供给，人负责策略、筛选与最终表达',
     ],
     deliverables: [
       {
         title: '都末日了，我不装了',
-        format: 'VERTICAL AI SHORT',
-        description: '以末日设定和反差叙事制造开场钩子，测试 AI 场景与角色在短视频剧情中的连续表达。',
+        format: 'STORY-DRIVEN AI SHORT',
+        description:
+          '以末日反差设定制造强开场，通过剧情推进测试 AI 场景连续性、角色稳定性与短视频叙事节奏。',
       },
       {
         title: '狗狗靠什么认出主人？',
-        format: 'AI KNOWLEDGE SHORT',
-        description: '把动物科普问题转译成轻剧情与视觉化表达，兼顾知识信息和社媒观看节奏。',
+        format: 'KNOWLEDGE-DRIVEN AI SHORT',
+        description:
+          '从高兴趣科普问题切入，把知识信息转译成视觉化短内容，探索“有用信息 + 轻叙事”在社媒中的表达方式。',
       },
       {
         title: '精彩登场',
-        format: 'AI CHARACTER FILM',
-        description: '围绕角色出场、镜头气氛与节奏设计完成视觉短片，重点验证人物一致性和镜头衔接。',
+        format: 'CHARACTER & VISUAL FILM',
+        description:
+          '围绕角色登场、动作、景别与氛围建立连续镜头，重点处理 AI 视频中人物一致性与镜头衔接问题。',
       },
       {
         title: '极米投影 · 猫咪音乐短片',
-        format: 'AI MUSIC VIDEO',
-        description: '用拟人猫咪演唱品牌主题歌词，将 AI 角色生成、音乐和产品卖点整合进一支娱乐化短片。',
+        format: 'BRAND AI MUSIC VIDEO',
+        description:
+          '把拟人角色、音乐改编与投影产品卖点组合成娱乐化内容，尝试降低品牌信息的硬广感。',
       },
       {
         title: '极米投影 · 音乐 Demo',
-        format: 'AI AUDIO',
-        description: '围绕投影产品卖点制作品牌主题音频，为音乐短片提供声音创意与节奏基础。',
+        format: 'BRAND AUDIO PROTOTYPE',
+        description:
+          '围绕产品观看体验与核心卖点制作品牌主题音频，为后续音乐短片提供节奏、歌词和声音方向。',
       },
     ],
     tone: 'signal',
@@ -408,27 +414,27 @@ export const aigcProjects: AigcProject[] = [
       image(
         '/assets/aigc/xgimi-apocalypse.jpg',
         '《都末日了，我不装了》关键帧',
-        '《都末日了，我不装了》｜竖版 AIGC 剧情短片',
+        '反差剧情实验｜用强设定建立短视频开场钩子',
       ),
       image(
         '/assets/aigc/xgimi-dog-recognition.jpg',
         '《狗狗靠什么认出主人？》关键帧',
-        '《狗狗靠什么认出主人？》｜AI 科普短片',
+        '知识内容实验｜把科普信息转译成轻量视觉叙事',
       ),
       image(
         '/assets/aigc/xgimi-grand-entrance.jpg',
         '《精彩登场》关键帧',
-        '《精彩登场》｜AI 角色与镜头实验',
+        '角色一致性实验｜处理人物、动作与镜头连续性',
       ),
       image(
         '/assets/aigc/xgimi-singing-cats.jpg',
         '极米投影猫咪音乐短片关键帧',
-        '极米投影 · 猫咪音乐短片｜AI 音乐影像',
+        '品牌音乐内容实验｜将娱乐表达与产品卖点结合',
       ),
       image(
         '/assets/aigc/xgimi-audio-waveform.svg',
         '极米投影音乐 Demo 波形',
-        '极米投影 · 音乐 Demo｜32 秒 AI 音频实验',
+        '声音原型｜从品牌卖点到歌词、节奏与音乐表达',
       ),
     ],
   },
