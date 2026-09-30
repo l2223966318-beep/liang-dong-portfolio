@@ -8,6 +8,12 @@ export type AigcMedia = {
   label?: string
 }
 
+export type AigcDeliverable = {
+  title: string
+  format: string
+  description: string
+}
+
 export type AigcProject = {
   id:
     | 'worldcup-copilot'
@@ -16,6 +22,7 @@ export type AigcProject = {
     | 'ai-history-video'
     | 'football-mbti'
     | 'creative-ai-suite'
+    | 'xgimi-aigc-shorts'
   index: string
   title: string
   subtitle: string
@@ -29,6 +36,7 @@ export type AigcProject = {
   tone: 'cobalt' | 'signal' | 'teal' | 'citron' | 'ink' | 'silver'
   cover: AigcMedia
   gallery: AigcMedia[]
+  deliverables?: AigcDeliverable[]
 }
 
 const image = (src: string, alt: string, caption: string): AigcMedia => ({
@@ -260,6 +268,65 @@ export const aigcProjects: AigcProject[] = [
         '人格匹配、解释与结果分享',
       ),
     ],
+  },
+  {
+    id: 'xgimi-aigc-shorts',
+    index: 'AI.07',
+    title: 'AIGC 商业短视频实验',
+    subtitle: '极米品牌创意内容与 AI 影像实践',
+    category: 'AI VIDEO / BRAND CREATIVE',
+    summary:
+      '围绕品牌内容传播，尝试把 AI 角色、反差叙事、动物科普与音乐改编做成短视频成片，验证生成式内容在社媒创意中的可用性。',
+    problem:
+      'AI 视频真正进入品牌内容时，难点不只是生成画面，而是让创意钩子、角色连续性、产品信息、节奏和平台观看体验同时成立。',
+    workflow: [
+      '从社媒传播场景确定创意钩子与脚本方向',
+      '拆解角色、场景、镜头与产品信息露出',
+      '用 AI 完成人物与画面生成，并反复修正连续性',
+      '完成剪辑、字幕、配音或音乐适配并输出短视频成片',
+    ],
+    collaboration:
+      'AI 负责角色与画面生成、创意变体和部分音频制作；人负责选题判断、脚本结构、品牌信息取舍、镜头筛选、剪辑节奏与最终成片验收。',
+    tools: ['AI 视频生成', 'AI 图像生成', 'ChatGPT', '剪辑工具', 'AI 音频'],
+    outcomes: [
+      '完成 4 支竖版 AIGC 短视频成片',
+      '覆盖反差剧情、动物科普、角色视觉与音乐短片等内容形态',
+      '额外完成 1 条品牌主题音频 Demo，形成从声音到画面的完整创意尝试',
+    ],
+    deliverables: [
+      {
+        title: '都末日了，我不装了',
+        format: 'VERTICAL AI SHORT',
+        description: '以末日设定和反差叙事制造开场钩子，测试 AI 场景与角色在短视频剧情中的连续表达。',
+      },
+      {
+        title: '狗狗靠什么认出主人？',
+        format: 'AI KNOWLEDGE SHORT',
+        description: '把动物科普问题转译成轻剧情与视觉化表达，兼顾知识信息和社媒观看节奏。',
+      },
+      {
+        title: '精彩登场',
+        format: 'AI CHARACTER FILM',
+        description: '围绕角色出场、镜头气氛与节奏设计完成视觉短片，重点验证人物一致性和镜头衔接。',
+      },
+      {
+        title: '极米投影 · 猫咪音乐短片',
+        format: 'AI MUSIC VIDEO',
+        description: '用拟人猫咪演唱品牌主题歌词，将 AI 角色生成、音乐和产品卖点整合进一支娱乐化短片。',
+      },
+      {
+        title: '极米投影 · 音乐 Demo',
+        format: 'AI AUDIO',
+        description: '围绕投影产品卖点制作品牌主题音频，为音乐短片提供声音创意与节奏基础。',
+      },
+    ],
+    tone: 'signal',
+    cover: image(
+      '/assets/aigc/xgimi-aigc-shorts.svg',
+      'AIGC 商业短视频实验封面',
+      '4 支 AI 短视频与 1 条品牌主题音频',
+    ),
+    gallery: [],
   },
   {
     id: 'creative-ai-suite',
