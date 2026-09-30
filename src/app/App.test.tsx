@@ -160,13 +160,13 @@ describe('App', () => {
     )
   })
 
-  it('offers six AI projects with stable showcase URLs', () => {
+  it('offers seven AI projects with stable showcase URLs', () => {
     render(<App />)
 
     expect(
       screen.getByRole('heading', { name: '把 AI 变成可以工作的产品。' }),
     ).toBeInTheDocument()
-    expect(screen.getAllByRole('link', { name: /查看AI案例：/ })).toHaveLength(6)
+    expect(screen.getAllByRole('link', { name: /查看AI案例：/ })).toHaveLength(7)
     expect(
       screen.getByRole('link', {
         name: '查看AI案例：WorldCup Copilot',
@@ -177,6 +177,11 @@ describe('App', () => {
         name: '查看AI案例：华服镜界 Hanfu Mirror',
       }),
     ).toHaveAttribute('href', '/?showcase=hanfu-mirror')
+    expect(
+      screen.getByRole('link', {
+        name: '查看AI案例：AIGC 商业短视频实验',
+      }),
+    ).toHaveAttribute('href', '/?showcase=xgimi-aigc-shorts')
   })
 
   it('navigates to a dedicated AI showcase and returns with browser history', async () => {
